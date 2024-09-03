@@ -6,7 +6,7 @@ public class Universidad {
 
 
     public void crearCarrera(int id_carrera, String nombre, int duracion, int precio_inscripcion,
-    int precio_cuota, Coordinador coordinador, Materia materia){
+    int precio_cuota){
 
     }
 
