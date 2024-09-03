@@ -1,6 +1,6 @@
 package TP1_Paradigmas;
 
-public class Carreras {
+public class Carrera {
     private int id_carrera;
     private String nombre;
     private int duracion;

@@ -2,7 +2,7 @@ package TP1_Paradigmas;
 
 public class Universidad {
     private String nombre;
-    private Carreras carrera;
+    private Carrera carrera;
 
 
     public void crearCarrera(int id_carrera, String nombre, int duracion, int precio_inscripcion,
