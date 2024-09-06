@@ -1,6 +1,10 @@
 package TP1_Paradigmas.clases;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import TP1_Paradigmas.usuarios.Coordinador;
+import TP1_Paradigmas.usuarios.Alumno;
 
 public class Carrera {
     private int id_carrera;
@@ -9,11 +13,15 @@ public class Carrera {
     private int precio_inscripcion;
     private int precio_cuota;
     private Coordinador coordinador;
-    private Materia materia;
+    private List<Materia> materias;
+    private List<Alumno> alumnos;
 
 
+    //constructor de carrera
     public Carrera(int id_carrera, String nombre, int duracion,
     int precio_inscripcion, int precio_cuota){
+        materias = new ArrayList<>();
+        alumnos = new ArrayList<>();
         this.id_carrera = id_carrera;
         this.nombre = nombre;
         this.duracion = duracion;
@@ -21,6 +29,7 @@ public class Carrera {
         this.precio_cuota = precio_cuota;
     }
 
+    //setters y getters
     public int getId_carrera() {
         return id_carrera;
     }
@@ -51,17 +60,32 @@ public class Carrera {
     public void setPrecio_cuota(int precio_cuota) {
         this.precio_cuota = precio_cuota;
     }
-    public Coordinador getCoordinador() {
-        return coordinador;
+
+    
+    //matriculacion de alumnos
+    public void matricularAlumno(Alumno alumno){
+        this.alumnos.add(alumno);
     }
-    public void setCoordinador(Coordinador coordinador) {
-        this.coordinador = coordinador;
+
+    public void eliminarAlumno(int n_legajo){
+        for(int i = 0; i < alumnos.size(); i++){
+            if(alumnos.get(i).getN_legajo() == n_legajo){
+                alumnos.remove(i);
+                break;
+            }
+        }
     }
-    public Materia getMateria() {
-        return materia;
+
+    public void listarAlumnos(){
+        for(int i = 0; i < alumnos.size(); i++){
+            System.out.println(alumnos.get(i).getNombre());
+        }
     }
-    public void setMateria(Materia materia) {
-        this.materia = materia;
+
+    public void listarMaterias(){
+        for(int i = 0; i < materias.size(); i++){
+            System.out.println(materias.get(i).getNombre());
+        }
     }
 
 }

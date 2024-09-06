@@ -9,6 +9,7 @@ public class menuLogearse extends JFrame implements ActionListener, ChangeListen
     private JButton boton1;
     private JRadioButton radio1, radio2, radio3;
     private ButtonGroup bg;
+    private int eleccion;
 
     public menuLogearse(){
         setLayout(null);
@@ -45,18 +46,34 @@ public class menuLogearse extends JFrame implements ActionListener, ChangeListen
 
     public void stateChanged(ChangeEvent e){
         if(radio1.isSelected()){
-            setTitle("Alumno");
+            eleccion = 0;
         }
         if(radio2.isSelected()){
-            setTitle("Profesor");
+            eleccion = 1;
         }
         if(radio3.isSelected()){
-            setTitle("Coordinador");
+            eleccion = 2;
         }
     }
 
     public void actionPerformed(ActionEvent e){
         if(e.getSource() == boton1){
+            switch(eleccion){
+                case 0:
+                    menuAlumno menuA = new menuAlumno();
+                    menuA.setBounds(0,0,400,300);
+                    menuA.setVisible(true);
+                    menuA.setLocationRelativeTo(null);
+                    this.setVisible(false);
+                    break;
+                case 1:
+                    break;
+                case 2:
+                    break;
+                default:
+                    break;
+            }
+
         }
     }
 
