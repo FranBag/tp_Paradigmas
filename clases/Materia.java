@@ -1,4 +1,4 @@
-package TP1_Paradigmas;
+package TP1_Paradigmas.clases;
 
 import java.util.HashMap;
 

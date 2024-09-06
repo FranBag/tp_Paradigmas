@@ -1,6 +1,6 @@
 package TP1_Paradigmas.usuarios;
 
-import TP1_Paradigmas.Carrera;
+import TP1_Paradigmas.clases.Carrera;
 
 public class Coordinador extends Usuario{
     private Carrera carrera;

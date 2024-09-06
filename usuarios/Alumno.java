@@ -1,7 +1,7 @@
 package TP1_Paradigmas.usuarios;
 
-import TP1_Paradigmas.Carrera;
-import TP1_Paradigmas.Materia;
+import TP1_Paradigmas.clases.Carrera;
+import TP1_Paradigmas.clases.Materia;
 
 public class Alumno extends Usuario{
     

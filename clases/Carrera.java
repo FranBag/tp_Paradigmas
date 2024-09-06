@@ -1,4 +1,4 @@
-package TP1_Paradigmas;
+package TP1_Paradigmas.clases;
 
 import TP1_Paradigmas.usuarios.Coordinador;
 

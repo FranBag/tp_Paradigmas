@@ -1,6 +1,6 @@
 package TP1_Paradigmas.usuarios;
 
-import TP1_Paradigmas.Materia;
+import TP1_Paradigmas.clases.Materia;
 
 public class Profesor extends Usuario{
     private Materia materias;

@@ -1,16 +1,16 @@
-package TP1_Paradigmas;
+package TP1_Paradigmas.menu;
 import javax.swing.*;
 import javax.swing.event.*;
 import java.awt.event.*;
 
-public class menuradio extends JFrame implements ActionListener, ChangeListener{
+public class menuLogearse extends JFrame implements ActionListener, ChangeListener{
     
     private JLabel label1;
     private JButton boton1;
     private JRadioButton radio1, radio2, radio3;
     private ButtonGroup bg;
 
-    public menuradio(){
+    public menuLogearse(){
         setLayout(null);
         bg = new ButtonGroup();
 
@@ -61,7 +61,7 @@ public class menuradio extends JFrame implements ActionListener, ChangeListener{
     }
 
     public static void main(String[] args) {
-        menuradio menu = new menuradio();
+        menuLogearse menu = new menuLogearse();
         menu.setBounds(0,0,400,300);
         menu.setVisible(true);
         menu.setLocationRelativeTo(null);
