@@ -60,6 +60,14 @@ public class Carrera {
     public void setPrecio_cuota(int precio_cuota) {
         this.precio_cuota = precio_cuota;
     }
+    public Coordinador getCoordinador() {
+        return coordinador;
+    }
+
+    public void setCoordinador(Coordinador coordinador) {
+        this.coordinador = coordinador;
+    }
+
 
     
     //matriculacion de alumnos
@@ -67,9 +75,9 @@ public class Carrera {
         this.alumnos.add(alumno);
     }
 
-    public void eliminarAlumno(int n_legajo){
+    public void eliminarAlumno(int n_legajo_alumno){
         for(int i = 0; i < alumnos.size(); i++){
-            if(alumnos.get(i).getN_legajo() == n_legajo){
+            if(alumnos.get(i).getN_legajo() == n_legajo_alumno){
                 alumnos.remove(i);
                 break;
             }

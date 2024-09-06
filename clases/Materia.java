@@ -70,6 +70,10 @@ public class Materia {
         } else {
             System.out.println("El alumno ya está inscrito en esta materia.");
         }
+        public List<Materia> getMaterias() {
+        return materias;
+    }
+}
     }
 
     // Método para dar de baja a un alumno de la materia

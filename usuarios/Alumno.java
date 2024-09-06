@@ -37,11 +37,12 @@ public class Alumno extends Usuario {
     public void inscribirCarrera(Carrera carrera) {
         this.carreraMatriculada = carrera;
         System.out.println("Alumno " + getNombre() + " inscrito en la carrera " + carrera.getNombre());
+        
     }
 
     // Método para inscribir al alumno en una materia
     public void inscribirMateria(Materia materia) {
-        if (carreraMatriculada != null && carreraMatriculada.getId_materia().contains(materia)) {
+        if (carreraMatriculada != null && carreraMatriculada.getmateria().contains(materia)) {
             if (!materiasInscriptas.contains(materia)) {
                 materia.inscribirAlumno(getN_legajo());
                 materiasInscriptas.add(materia);

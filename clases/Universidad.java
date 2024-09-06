@@ -46,4 +46,12 @@ public class Universidad {
         }
     }
 
+    public void asignarCoordinador(int n_legajo_coordinador, int id_carrera){
+        for(int i = 0; i < carreras.size(); i++){
+            if(carreras.get(i).getN_legajo() == n_legajo_alumno){
+                alumnos.remove(i);
+                break;
+            }
+        }
+    }
 }
