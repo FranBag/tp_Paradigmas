@@ -2,6 +2,8 @@ package TP1_Paradigmas;
 
 import java.util.HashMap;
 
+import TP1_Paradigmas.usuarios.Profesor;
+
 public class Materia {
     private int id_materia;
     private String nombre;

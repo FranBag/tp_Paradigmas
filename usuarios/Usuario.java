@@ -1,4 +1,4 @@
-package TP1_Paradigmas;
+package TP1_Paradigmas.usuarios;
 
 public class Usuario {
     private int n_legajo;

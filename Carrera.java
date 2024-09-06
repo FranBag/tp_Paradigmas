@@ -1,5 +1,7 @@
 package TP1_Paradigmas;
 
+import TP1_Paradigmas.usuarios.Coordinador;
+
 public class Carrera {
     private int id_carrera;
     private String nombre;
