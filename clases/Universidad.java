@@ -23,7 +23,7 @@ public class Universidad {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    public Carrera getCarrera(int id_carrera) {
+    public Carrera getCarreraByID(int id_carrera) {
         for(int i = 0; i < carreras.size(); i++){
             if(carreras.get(i).getId_carrera() == id_carrera){
                 return carreras.get(i);
@@ -31,7 +31,7 @@ public class Universidad {
         }
         return null; //si no se encuentra una carrera con ese id devuelve null
     }
-    
+
     //crea una carrera
     public void crearCarrera(int id_carrera, String nombre, int duracion, int precio_inscripcion,
     int precio_cuota){
@@ -50,10 +50,16 @@ public class Universidad {
     }
 
     //lista todas las carreras
-    public void listarCarreras(){
-        for(int i = 0; i < carreras.size(); i++){
-            System.out.println(carreras.get(i).getNombre());
+    public String[][] listarCarreras(){
+        int tamaño_carreras = carreras.size();
+        String[][] lista_carreras = new String[tamaño_carreras][3];
+        for(int i = 0; i < tamaño_carreras; i++){
+            lista_carreras[i][0] = carreras.get(i).getNombre();
+            lista_carreras[i][1] = String.valueOf(carreras.get(i).getDuracion());
+            lista_carreras[i][2] = String.valueOf(carreras.get(i).getPrecio_inscripcion());
+            System.out.println(carreras);
         }
+        return lista_carreras;
     }
 
     public void asignarCoordinador(Coordinador coordinador, int id_carrera){

@@ -1,6 +1,9 @@
 package TP1_Paradigmas.menu;
 import javax.swing.*;
 import javax.swing.event.*;
+
+import TP1_Paradigmas.clases.Universidad;
+
 import java.awt.event.*;
 
 public class MenuLogearse extends JFrame implements ActionListener, ChangeListener{
@@ -10,8 +13,10 @@ public class MenuLogearse extends JFrame implements ActionListener, ChangeListen
     private JRadioButton radio1, radio2, radio3;
     private ButtonGroup bg;
     private int eleccion;
+    private Universidad universidad;
 
-    public MenuLogearse(){
+    public MenuLogearse(Universidad universidad){
+        this.universidad = universidad;
         setLayout(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         bg = new ButtonGroup();
@@ -61,7 +66,7 @@ public class MenuLogearse extends JFrame implements ActionListener, ChangeListen
         if(e.getSource() == boton1){
             switch(eleccion){
                 case 0:
-                    MenuAlumno menuA = new MenuAlumno(this);
+                    MenuAlumno menuA = new MenuAlumno(this, universidad);
                     menuA.setBounds(0,0,400,300);
                     menuA.setVisible(true);
                     menuA.setLocationRelativeTo(null);

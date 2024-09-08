@@ -40,7 +40,7 @@ public class Alumno extends Usuario {
 
     // Método para inscribir al alumno en una carrera
     public void inscribirCarrera(int id_carrera) {
-        Carrera carreraInscribir = universidad.getCarrera(id_carrera);
+        Carrera carreraInscribir = universidad.getCarreraByID(id_carrera);
         carreraInscribir.matricularAlumno(this);
         this.carreraMatriculada = carreraInscribir;
 

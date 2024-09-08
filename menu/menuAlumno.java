@@ -2,6 +2,10 @@ package TP1_Paradigmas.menu;
 
 import javax.swing.*;
 import javax.swing.event.*;
+
+import TP1_Paradigmas.app;
+import TP1_Paradigmas.clases.Universidad;
+
 import java.awt.event.*;
 
 public class MenuAlumno extends JFrame implements ActionListener{
@@ -9,8 +13,10 @@ public class MenuAlumno extends JFrame implements ActionListener{
     private JLabel label1, label2, label3;
     private JButton boton1, boton2, boton3, boton4;
     private MenuLogearse login;
+    private Universidad universidad;
 
-    public MenuAlumno(MenuLogearse login){
+    public MenuAlumno(MenuLogearse login, Universidad universidad){
+        this.universidad = universidad;
         this.login = login;
         setLayout(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -46,7 +52,7 @@ public class MenuAlumno extends JFrame implements ActionListener{
 
     public void actionPerformed(ActionEvent e){
         if(e.getSource() == boton1){
-            MenuInscribirseCarrera menuT = new MenuInscribirseCarrera();
+            MenuInscribirseCarrera menuT = new MenuInscribirseCarrera(universidad);
             menuT.setBounds(0,0,600,400);
             menuT.setVisible(true);
             menuT.setLocationRelativeTo(null);
@@ -58,20 +64,19 @@ public class MenuAlumno extends JFrame implements ActionListener{
             setTitle("Asistencia");
         }
         if(e.getSource() == boton4){
-            MenuLogearse menu = new MenuLogearse();
-            menu.setBounds(0,0,400,300);
-            menu.setVisible(true);
-            menu.setLocationRelativeTo(null);
-            this.setVisible(false);
+            // MenuLogearse menu = new MenuLogearse();
+            // menu.setBounds(0,0,400,300);
+            // menu.setVisible(true);
+            // menu.setLocationRelativeTo(null);
+            // this.setVisible(false);
         }
     }
 
     public static void main(String[] args) {
-        // MenuAlumno menuA = new MenuAlumno(null);
+        // MenuAlumno menuA = new MenuAlumno(null, null);
         // menuA.setBounds(0,0,400,300);
         // menuA.setVisible(true);
         // menuA.setLocationRelativeTo(null);
-
 
     }
 }
@@ -82,7 +87,7 @@ class MenuInscribirseCarrera extends JFrame implements ActionListener{
     private JTable tabla1;
     private JScrollPane scroll;
 
-    public MenuInscribirseCarrera(){
+    public MenuInscribirseCarrera(Universidad universidad){
         setLayout(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -92,10 +97,7 @@ class MenuInscribirseCarrera extends JFrame implements ActionListener{
 
         String[] columnas = {"Nombre", "Duración", "Precio Inscripción"};
 
-        String[][] filas = {
-            {"Ingenieria", "4546", "4165"},
-            {"Licenciatura", "4544446", "411165"}
-        };
+        String[][] filas = universidad.listarCarreras();
 
         tabla1 = new JTable(filas, columnas);
         tabla1.setBounds(5,30,500,250);
