@@ -54,11 +54,8 @@ public class MenuCoordinador extends JFrame implements ActionListener{
             setTitle("Asistencia");
         }
         if(e.getSource() == boton4){
-            MenuLogearse menu = new MenuLogearse();
-            menu.setBounds(0,0,400,300);
-            menu.setVisible(true);
-            menu.setLocationRelativeTo(null);
-            this.setVisible(false);
+            login.setVisible(true);
+            dispose();
         }
     }
 

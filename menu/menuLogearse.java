@@ -90,12 +90,4 @@ public class MenuLogearse extends JFrame implements ActionListener, ChangeListen
 
         }
     }
-
-    public static void main(String[] args) {
-        MenuLogearse menu = new MenuLogearse();
-        menu.setBounds(0,0,400,300);
-        menu.setVisible(true);
-        menu.setLocationRelativeTo(null);
-    }
-
 }

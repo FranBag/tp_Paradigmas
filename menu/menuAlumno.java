@@ -29,8 +29,8 @@ public class MenuAlumno extends JFrame implements ActionListener{
         add(label2);
         
 
-        boton1 = new JButton("Inscribirse Carrera");
-        boton1.setBounds(10,60,150,30);
+        boton1 = new JButton("Matricularse Carrera");
+        boton1.setBounds(10,60,180,30);
         add(boton1);
         boton1.addActionListener(this);
 
@@ -52,10 +52,11 @@ public class MenuAlumno extends JFrame implements ActionListener{
 
     public void actionPerformed(ActionEvent e){
         if(e.getSource() == boton1){
-            MenuInscribirseCarrera menuT = new MenuInscribirseCarrera(universidad);
+            MenuInscribirseCarrera menuT = new MenuInscribirseCarrera(universidad, this);
             menuT.setBounds(0,0,600,400);
             menuT.setVisible(true);
             menuT.setLocationRelativeTo(null);
+            this.setVisible(false);
         }
         if(e.getSource() == boton2){
             setTitle("Materia");
@@ -64,30 +65,21 @@ public class MenuAlumno extends JFrame implements ActionListener{
             setTitle("Asistencia");
         }
         if(e.getSource() == boton4){
-            // MenuLogearse menu = new MenuLogearse();
-            // menu.setBounds(0,0,400,300);
-            // menu.setVisible(true);
-            // menu.setLocationRelativeTo(null);
-            // this.setVisible(false);
+            login.setVisible(true);
+            dispose();
         }
-    }
-
-    public static void main(String[] args) {
-        // MenuAlumno menuA = new MenuAlumno(null, null);
-        // menuA.setBounds(0,0,400,300);
-        // menuA.setVisible(true);
-        // menuA.setLocationRelativeTo(null);
-
     }
 }
 
 class MenuInscribirseCarrera extends JFrame implements ActionListener{
-    private JLabel label1, label2, label3;
+    private JLabel label1, label2;
     private JButton boton1, boton2;
     private JTable tabla1;
     private JScrollPane scroll;
+    private MenuAlumno menualumno;
 
-    public MenuInscribirseCarrera(Universidad universidad){
+    public MenuInscribirseCarrera(Universidad universidad, MenuAlumno menualumno){
+        this.menualumno = menualumno;
         setLayout(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -95,18 +87,51 @@ class MenuInscribirseCarrera extends JFrame implements ActionListener{
         label1.setBounds(5,5,300,30);
         add(label1);
 
+        label1 = new JLabel("Nombre / Duración / P.Inscripción");
+        label1.setBounds(5,25,600,30);
+        add(label1);
+        
         String[] columnas = {"Nombre", "Duración", "Precio Inscripción"};
 
         String[][] filas = universidad.listarCarreras();
 
-        tabla1 = new JTable(filas, columnas);
-        tabla1.setBounds(5,30,500,250);
+        tabla1 = new JTable(filas, columnas){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        tabla1.setBounds(5,50,500,220);
 
         scroll = new JScrollPane(tabla1);
         add(tabla1);
+
+        boton1 = new JButton("Matricularse");
+        boton1.setBounds(10,280,120,30);
+        add(boton1);
+        boton1.addActionListener(this);
+
+        boton2 = new JButton("Volver");
+        boton2.setBounds(10,320,80,30);
+        add(boton2);
+        boton2.addActionListener(this);
     }
 
         public void actionPerformed(ActionEvent e){
-
+            if(e.getSource() == boton1){
+                int filaSeleccionada = tabla1.getSelectedRow();
+                if(filaSeleccionada == -1) {
+                    JOptionPane.showMessageDialog(null, "Debes seleccionar una carrera.",
+                    "Advertencia", JOptionPane.WARNING_MESSAGE);
+                }else{
+                    JOptionPane.showMessageDialog(null, "Matriculación realizada.");
+                    menualumno.setVisible(true);
+                    dispose();
+                }
+            }
+            if(e.getSource() == boton2){
+                menualumno.setVisible(true);
+                dispose();
+            }
         }
 }
