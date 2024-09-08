@@ -3,6 +3,8 @@ package TP1_Paradigmas.clases;
 import java.util.ArrayList;
 import java.util.List;
 
+import TP1_Paradigmas.usuarios.Coordinador;
+
 public class Universidad {
     private String nombre;
     private List<Carrera> carreras;
@@ -20,6 +22,14 @@ public class Universidad {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+    public Carrera getCarrera(int id_carrera) {
+        for(int i = 0; i < carreras.size(); i++){
+            if(carreras.get(i).getId_carrera() == id_carrera){
+                return carreras.get(i);
+            }
+        }
+        return null; //si no se encuentra una carrera con ese id devuelve null
     }
     
     //crea una carrera
@@ -46,10 +56,10 @@ public class Universidad {
         }
     }
 
-    public void asignarCoordinador(int n_legajo_coordinador, int id_carrera){
+    public void asignarCoordinador(Coordinador coordinador, int id_carrera){
         for(int i = 0; i < carreras.size(); i++){
-            if(carreras.get(i).getN_legajo() == n_legajo_alumno){
-                alumnos.remove(i);
+            if(carreras.get(i).getId_carrera() == id_carrera){
+                carreras.get(i).setCoordinador(coordinador);
                 break;
             }
         }

@@ -4,36 +4,52 @@ import javax.swing.*;
 import javax.swing.event.*;
 import java.awt.event.*;
 
-public class menuAlumno extends JFrame implements ActionListener{
+public class MenuAlumno extends JFrame implements ActionListener{
     
-    private JLabel label1;
-    private JButton boton1, boton2, boton3;
+    private JLabel label1, label2, label3;
+    private JButton boton1, boton2, boton3, boton4;
+    private MenuLogearse login;
 
-    public menuAlumno(){
+    public MenuAlumno(MenuLogearse login){
+        this.login = login;
         setLayout(null);
-        label1 = new JLabel("Hola soy el alumno: ...");
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        label1 = new JLabel("Alumno: ...");
         label1.setBounds(10,10,200,30);
         add(label1);
 
+        label2 = new JLabel("Carrera: ...");
+        label2.setBounds(10,25,200,30);
+        add(label2);
+        
+
         boton1 = new JButton("Inscribirse Carrera");
-        boton1.setBounds(10,50,150,30);
+        boton1.setBounds(10,60,150,30);
         add(boton1);
         boton1.addActionListener(this);
 
         boton2 = new JButton("Inscribirse Materia");
-        boton2.setBounds(10,90,150,30);
+        boton2.setBounds(10,100,150,30);
         add(boton2);
         boton2.addActionListener(this);
 
         boton3 = new JButton("Ver Asistencia");
-        boton3.setBounds(10,130,150,30);
+        boton3.setBounds(10,140,150,30);
         add(boton3);
         boton3.addActionListener(this);
+
+        boton4 = new JButton("Volver");
+        boton4.setBounds(5,220,80,30);
+        add(boton4);
+        boton4.addActionListener(this);
     }
 
     public void actionPerformed(ActionEvent e){
         if(e.getSource() == boton1){
-            setTitle("Carrera");
+            MenuInscribirseCarrera menuT = new MenuInscribirseCarrera();
+            menuT.setBounds(0,0,600,400);
+            menuT.setVisible(true);
+            menuT.setLocationRelativeTo(null);
         }
         if(e.getSource() == boton2){
             setTitle("Materia");
@@ -41,12 +57,54 @@ public class menuAlumno extends JFrame implements ActionListener{
         if(e.getSource() == boton3){
             setTitle("Asistencia");
         }
+        if(e.getSource() == boton4){
+            MenuLogearse menu = new MenuLogearse();
+            menu.setBounds(0,0,400,300);
+            menu.setVisible(true);
+            menu.setLocationRelativeTo(null);
+            this.setVisible(false);
+        }
     }
 
     public static void main(String[] args) {
-        menuAlumno menuA = new menuAlumno();
-        menuA.setBounds(0,0,400,300);
-        menuA.setVisible(true);
-        menuA.setLocationRelativeTo(null);
+        // MenuAlumno menuA = new MenuAlumno(null);
+        // menuA.setBounds(0,0,400,300);
+        // menuA.setVisible(true);
+        // menuA.setLocationRelativeTo(null);
+
+
     }
+}
+
+class MenuInscribirseCarrera extends JFrame implements ActionListener{
+    private JLabel label1, label2, label3;
+    private JButton boton1, boton2;
+    private JTable tabla1;
+    private JScrollPane scroll;
+
+    public MenuInscribirseCarrera(){
+        setLayout(null);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+        label1 = new JLabel("Listado de carreras dentro de la universidad");
+        label1.setBounds(5,5,300,30);
+        add(label1);
+
+        String[] columnas = {"Nombre", "Duración", "Precio Inscripción"};
+
+        String[][] filas = {
+            {"Ingenieria", "4546", "4165"},
+            {"Licenciatura", "4544446", "411165"}
+        };
+
+        tabla1 = new JTable(filas, columnas);
+        tabla1.setBounds(5,30,500,250);
+
+        scroll = new JScrollPane(tabla1);
+        add(tabla1);
+    }
+
+        public void actionPerformed(ActionEvent e){
+
+        }
 }

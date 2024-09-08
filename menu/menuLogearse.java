@@ -3,7 +3,7 @@ import javax.swing.*;
 import javax.swing.event.*;
 import java.awt.event.*;
 
-public class menuLogearse extends JFrame implements ActionListener, ChangeListener{
+public class MenuLogearse extends JFrame implements ActionListener, ChangeListener{
     
     private JLabel label1;
     private JButton boton1;
@@ -11,8 +11,9 @@ public class menuLogearse extends JFrame implements ActionListener, ChangeListen
     private ButtonGroup bg;
     private int eleccion;
 
-    public menuLogearse(){
+    public MenuLogearse(){
         setLayout(null);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         bg = new ButtonGroup();
 
         label1 = new JLabel("Elija su rol dentro de la universidad");
@@ -60,17 +61,25 @@ public class menuLogearse extends JFrame implements ActionListener, ChangeListen
         if(e.getSource() == boton1){
             switch(eleccion){
                 case 0:
-                    menuAlumno menuA = new menuAlumno();
+                    MenuAlumno menuA = new MenuAlumno(this);
                     menuA.setBounds(0,0,400,300);
                     menuA.setVisible(true);
                     menuA.setLocationRelativeTo(null);
                     this.setVisible(false);
                     break;
                 case 1:
+                    MenuProfesor menuP = new MenuProfesor(this);
+                    menuP.setBounds(0,0,400,300);
+                    menuP.setVisible(true);
+                    menuP.setLocationRelativeTo(null);
+                    this.setVisible(false);
                     break;
                 case 2:
-                    break;
-                default:
+                    MenuCoordinador menuC = new MenuCoordinador(this);
+                    menuC.setBounds(0,0,400,300);
+                    menuC.setVisible(true);
+                    menuC.setLocationRelativeTo(null);
+                    this.setVisible(false);
                     break;
             }
 
@@ -78,7 +87,7 @@ public class menuLogearse extends JFrame implements ActionListener, ChangeListen
     }
 
     public static void main(String[] args) {
-        menuLogearse menu = new menuLogearse();
+        MenuLogearse menu = new MenuLogearse();
         menu.setBounds(0,0,400,300);
         menu.setVisible(true);
         menu.setLocationRelativeTo(null);
