@@ -127,7 +127,7 @@ class MenuMatricularseCarrera extends JFrame implements ActionListener{
                     JOptionPane.showMessageDialog(null, "Debes seleccionar una carrera.",
                     "Advertencia", JOptionPane.WARNING_MESSAGE);
                 }else{
-                    // alumno1.inscribirCarrera(filas[filaSeleccionada][0]);//TERMINAR DE HACER 
+                    alumno1.inscribirCarrera(filas[filaSeleccionada][0]);//TERMINAR DE HACER 
                     JOptionPane.showMessageDialog(null, "Matriculación realizada.");
                     menualumno.setVisible(true);
                     dispose();

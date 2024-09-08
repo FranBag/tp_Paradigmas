@@ -1,6 +1,10 @@
 package TP1_Paradigmas.clases;
 
 import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
+
+import TP1_Paradigmas.usuarios.Alumno;
 import TP1_Paradigmas.usuarios.Profesor;
 
 public class Materia {
@@ -11,8 +15,11 @@ public class Materia {
     private int cuatrimestre;
     HashMap<String, String> situacion = new HashMap<String, String>();
     HashMap<String, String> asistencias = new HashMap<String, String>();
+    private List<Alumno> alumnos;
+    
 
     public Materia(int id_materia, String nombre, Profesor profesor, int curso, int cuatrimestre){
+        alumnos = new ArrayList<>();
         this.id_materia = id_materia;
         this.nombre = nombre;
         this.profesor = profesor;
