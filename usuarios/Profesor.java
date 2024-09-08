@@ -15,6 +15,10 @@ public class Profesor extends Usuario{
         materias = new ArrayList<>();
     }
 
+    public Profesor(){
+        
+    }
+
     public void gestionarSituacionAlumno(int id_alumno, String situacion){
 
     }

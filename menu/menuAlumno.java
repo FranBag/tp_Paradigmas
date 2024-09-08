@@ -52,7 +52,7 @@ public class MenuAlumno extends JFrame implements ActionListener{
 
     public void actionPerformed(ActionEvent e){
         if(e.getSource() == boton1){
-            MenuInscribirseCarrera menuT = new MenuInscribirseCarrera(universidad, this);
+            MenuMatricularseCarrera menuT = new MenuMatricularseCarrera(universidad, this);
             menuT.setBounds(0,0,600,400);
             menuT.setVisible(true);
             menuT.setLocationRelativeTo(null);
@@ -71,19 +71,90 @@ public class MenuAlumno extends JFrame implements ActionListener{
     }
 }
 
-class MenuInscribirseCarrera extends JFrame implements ActionListener{
+
+//menú de matriculación a una carrera
+class MenuMatricularseCarrera extends JFrame implements ActionListener{
+    private JLabel label1;
+    private JButton boton1, boton2;
+    private JTable tabla1;
+    private JScrollPane scroll;
+    private MenuAlumno menualumno;
+
+    public MenuMatricularseCarrera(Universidad universidad, MenuAlumno menualumno){
+        this.menualumno = menualumno;
+        setLayout(null);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+        label1 = new JLabel("Listado de carreras dentro de la universidad");
+        label1.setBounds(5,5,300,30);
+        add(label1);
+        
+        String[] columnas = {"ID", "Nombre", "Duración", "Precio Inscripción"};
+
+        String[][] filas = universidad.listarCarreras();
+
+        tabla1 = new JTable(filas, columnas){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        tabla1.setRowHeight(30);
+        tabla1.getColumnModel().getColumn(0).setPreferredWidth(50);
+        tabla1.getColumnModel().getColumn(1).setPreferredWidth(200);
+        tabla1.getColumnModel().getColumn(2).setPreferredWidth(50);
+        tabla1.getColumnModel().getColumn(3).setPreferredWidth(100);
+
+        scroll = new JScrollPane(tabla1);
+        scroll.setBounds(5,50,500,220);
+        add(scroll);
+
+        boton1 = new JButton("Matricularse");
+        boton1.setBounds(10,280,120,30);
+        add(boton1);
+        boton1.addActionListener(this);
+
+        boton2 = new JButton("Volver");
+        boton2.setBounds(10,320,80,30);
+        add(boton2);
+        boton2.addActionListener(this);
+    }
+
+        public void actionPerformed(ActionEvent e){
+            if(e.getSource() == boton1){
+                int filaSeleccionada = tabla1.getSelectedRow();
+                if(filaSeleccionada == -1) {
+                    JOptionPane.showMessageDialog(null, "Debes seleccionar una carrera.",
+                    "Advertencia", JOptionPane.WARNING_MESSAGE);
+                }else{
+                    // alumno1.inscribirCarrera(filas[filaSeleccionada][0]);//TERMINAR DE HACER 
+                    JOptionPane.showMessageDialog(null, "Matriculación realizada.");
+                    menualumno.setVisible(true);
+                    dispose();
+                }
+            }
+            if(e.getSource() == boton2){
+                menualumno.setVisible(true);
+                dispose();
+            }
+        }
+}
+
+
+//menu para inscribirse a una o mas materias de una carrera
+class MenuInscribirseMateria extends JFrame implements ActionListener{
     private JLabel label1, label2;
     private JButton boton1, boton2;
     private JTable tabla1;
     private JScrollPane scroll;
     private MenuAlumno menualumno;
 
-    public MenuInscribirseCarrera(Universidad universidad, MenuAlumno menualumno){
+    public MenuInscribirseMateria(Universidad universidad, MenuAlumno menualumno){
         this.menualumno = menualumno;
         setLayout(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        label1 = new JLabel("Listado de carreras dentro de la universidad");
+        label1 = new JLabel("Listado de materias dentro de la carrera "+ this.carrera);
         label1.setBounds(5,5,300,30);
         add(label1);
 

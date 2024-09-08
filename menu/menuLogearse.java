@@ -1,10 +1,15 @@
 package TP1_Paradigmas.menu;
+
 import javax.swing.*;
 import javax.swing.event.*;
+import java.awt.event.*;
 
 import TP1_Paradigmas.clases.Universidad;
+import TP1_Paradigmas.usuarios.Alumno;
+import TP1_Paradigmas.usuarios.Coordinador;
+import TP1_Paradigmas.usuarios.Profesor;
 
-import java.awt.event.*;
+
 
 public class MenuLogearse extends JFrame implements ActionListener, ChangeListener{
     
@@ -66,26 +71,45 @@ public class MenuLogearse extends JFrame implements ActionListener, ChangeListen
         if(e.getSource() == boton1){
             switch(eleccion){
                 case 0:
-                    MenuAlumno menuA = new MenuAlumno(this, universidad);
-                    menuA.setBounds(0,0,400,300);
-                    menuA.setVisible(true);
-                    menuA.setLocationRelativeTo(null);
+                    Alumno alumno = new Alumno();
+                    MenuCrear menuCrear1 = new MenuCrear(this, alumno);
+                    menuCrear1.setBounds(0,0,500,300);
+                    menuCrear1.setVisible(true);
+                    menuCrear1.setLocationRelativeTo(null);
                     this.setVisible(false);
                     break;
+                    // MenuAlumno menuA = new MenuAlumno(this, universidad);
+                    // menuA.setBounds(0,0,400,300);
+                    // menuA.setVisible(true);
+                    // menuA.setLocationRelativeTo(null);
+                    // this.setVisible(false);
+                    // break;
                 case 1:
-                    MenuProfesor menuP = new MenuProfesor(this);
-                    menuP.setBounds(0,0,400,300);
-                    menuP.setVisible(true);
-                    menuP.setLocationRelativeTo(null);
+                    Profesor profesor = new Profesor();
+                    MenuCrear menuCrear2 = new MenuCrear(this, profesor);
+                    menuCrear2.setBounds(0,0,500,300);
+                    menuCrear2.setVisible(true);
+                    menuCrear2.setLocationRelativeTo(null);
                     this.setVisible(false);
-                    break;
+                    // MenuProfesor menuP = new MenuProfesor(this);
+                    // menuP.setBounds(0,0,400,300);
+                    // menuP.setVisible(true);
+                    // menuP.setLocationRelativeTo(null);
+                    // this.setVisible(false);
+                    // break;
                 case 2:
-                    MenuCoordinador menuC = new MenuCoordinador(this);
-                    menuC.setBounds(0,0,400,300);
-                    menuC.setVisible(true);
-                    menuC.setLocationRelativeTo(null);
+                    Coordinador coordinador = new Coordinador();
+                    MenuCrear menuCrear3 = new MenuCrear(this, coordinador);
+                    menuCrear3.setBounds(0,0,500,300);
+                    menuCrear3.setVisible(true);
+                    menuCrear3.setLocationRelativeTo(null);
                     this.setVisible(false);
-                    break;
+                    // MenuCoordinador menuC = new MenuCoordinador(this);
+                    // menuC.setBounds(0,0,400,300);
+                    // menuC.setVisible(true);
+                    // menuC.setLocationRelativeTo(null);
+                    // this.setVisible(false);
+                    // break;
             }
 
         }

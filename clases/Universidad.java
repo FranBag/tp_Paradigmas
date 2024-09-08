@@ -52,11 +52,12 @@ public class Universidad {
     //lista todas las carreras
     public String[][] listarCarreras(){
         int tamaño_carreras = carreras.size();
-        String[][] lista_carreras = new String[tamaño_carreras][3];
+        String[][] lista_carreras = new String[tamaño_carreras][4];
         for(int i = 0; i < tamaño_carreras; i++){
-            lista_carreras[i][0] = carreras.get(i).getNombre();
-            lista_carreras[i][1] = String.valueOf(carreras.get(i).getDuracion());
-            lista_carreras[i][2] = String.valueOf(carreras.get(i).getPrecio_inscripcion());
+            lista_carreras[i][0] = String.valueOf(carreras.get(i).getId_carrera());
+            lista_carreras[i][1] = carreras.get(i).getNombre();
+            lista_carreras[i][2] = String.valueOf(carreras.get(i).getDuracion());
+            lista_carreras[i][3] = String.valueOf(carreras.get(i).getPrecio_inscripcion());
             System.out.println(carreras);
         }
         return lista_carreras;

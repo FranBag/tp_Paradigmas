@@ -12,6 +12,10 @@ public class Coordinador extends Usuario{
         super(n_legajo, nombre, apellido, email, sexo, n_telefono, dni);
     }
 
+    public Coordinador(){
+        
+    }
+
     public void asignarProfesor(int n_legajo, int id_materia){
 
     }

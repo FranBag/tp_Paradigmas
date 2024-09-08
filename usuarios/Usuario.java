@@ -21,6 +21,10 @@ public class Usuario {
         this.dni = dni;
     }
 
+    public Usuario(){
+        
+    }
+
     public int getN_legajo() {
         return n_legajo;
     }

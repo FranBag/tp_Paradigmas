@@ -38,12 +38,15 @@ public class Alumno extends Usuario {
         this.materiasInscriptas = new ArrayList<>();
     }
 
+    public Alumno(){
+
+    }
+
     // Método para inscribir al alumno en una carrera
     public void inscribirCarrera(int id_carrera) {
         Carrera carreraInscribir = universidad.getCarreraByID(id_carrera);
         carreraInscribir.matricularAlumno(this);
         this.carreraMatriculada = carreraInscribir;
-
     }
 
     // Método para inscribir al alumno en una materia
