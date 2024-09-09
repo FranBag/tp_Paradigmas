@@ -6,12 +6,12 @@ public class Usuario {
     private String apellido;
     private String email;
     private String sexo;
-    private int n_telefono;
+    private String n_telefono;
     private int dni;
 
 
     public Usuario(int n_legajo, String nombre, String apellido,
-    String email, String sexo, int n_telefono, int dni){
+    String email, String sexo, String n_telefono, int dni){
         this.n_legajo = n_legajo;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -22,7 +22,7 @@ public class Usuario {
     }
 
     public Usuario(){
-        
+
     }
 
     public int getN_legajo() {
@@ -65,11 +65,11 @@ public class Usuario {
         this.sexo = sexo;
     }
 
-    public int getN_telefono() {
+    public String getN_telefono() {
         return n_telefono;
     }
 
-    public void setN_telefono(int n_telefono) {
+    public void setN_telefono(String n_telefono) {
         this.n_telefono = n_telefono;
     }
 

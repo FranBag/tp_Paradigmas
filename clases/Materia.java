@@ -83,16 +83,6 @@ public class Materia {
 }
     }
 
-    // Método para dar de baja a un alumno de la materia
-    public void bajaAlumno(int id_alumno) {
-        if (situacion.containsKey(String.valueOf(id_alumno))) {
-            situacion.remove(String.valueOf(id_alumno));
-            asistencias.remove(String.valueOf(id_alumno));
-            System.out.println("Alumno " + id_alumno + " dado de baja de la materia " + nombre);
-        } else {
-            System.out.println("El alumno no está inscrito en esta materia.");
-        }
-    }
 
     // Método para cambiar la situación de un alumno
     public void cambiarSituacionAlumno(int id_alumno, String nuevaSituacion) {

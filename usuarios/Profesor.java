@@ -10,7 +10,7 @@ public class Profesor extends Usuario{
 
     
     public Profesor(int n_legajo, String nombre, String apellido,
-    String email, String sexo, int n_telefono, int dni) {
+    String email, String sexo, String n_telefono, int dni) {
         super(n_legajo, nombre, apellido, email, sexo, n_telefono, dni);
         materias = new ArrayList<>();
     }

@@ -20,7 +20,7 @@ public class app {
         // UCP.listarCarreras();
 
         Alumno alumno1 = new Alumno(555, "Francisco","Bagneres",
-        "f@gmail.com", "Hombre", 376425, 4623, UCP);
+        "f@gmail.com", "Hombre", "376425", 4623, UCP);
 
         alumno1.inscribirCarrera(1);
 

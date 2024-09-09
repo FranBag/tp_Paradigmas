@@ -32,7 +32,7 @@ public class Alumno extends Usuario {
     private Universidad universidad;
 
     public Alumno(int n_legajo, String nombre, String apellido, String email,
-    String sexo, int n_telefono, int dni, Universidad universidad) {
+    String sexo, String n_telefono, int dni, Universidad universidad) {
         super(n_legajo, nombre, apellido, email, sexo, n_telefono, dni);
         this.universidad = universidad;
         this.materiasInscriptas = new ArrayList<>();
@@ -41,6 +41,16 @@ public class Alumno extends Usuario {
     public Alumno(){
 
     }
+
+    //setter y getter de universidad
+    public Universidad getUniversidad() {
+        return universidad;
+    }
+
+    public void setUniversidad(Universidad universidad) {
+        this.universidad = universidad;
+    }
+
 
     // Método para inscribir al alumno en una carrera
     public void inscribirCarrera(int id_carrera) {

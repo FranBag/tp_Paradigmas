@@ -72,7 +72,7 @@ public class MenuLogearse extends JFrame implements ActionListener, ChangeListen
             switch(eleccion){
                 case 0:
                     Alumno alumno = new Alumno();
-                    MenuCrear menuCrear1 = new MenuCrear(this, alumno);
+                    MenuCrear menuCrear1 = new MenuCrear(this, universidad, alumno);
                     menuCrear1.setBounds(0,0,500,300);
                     menuCrear1.setVisible(true);
                     menuCrear1.setLocationRelativeTo(null);
@@ -86,11 +86,12 @@ public class MenuLogearse extends JFrame implements ActionListener, ChangeListen
                     // break;
                 case 1:
                     Profesor profesor = new Profesor();
-                    MenuCrear menuCrear2 = new MenuCrear(this, profesor);
+                    MenuCrear menuCrear2 = new MenuCrear(this, universidad, profesor);
                     menuCrear2.setBounds(0,0,500,300);
                     menuCrear2.setVisible(true);
                     menuCrear2.setLocationRelativeTo(null);
                     this.setVisible(false);
+                    break;
                     // MenuProfesor menuP = new MenuProfesor(this);
                     // menuP.setBounds(0,0,400,300);
                     // menuP.setVisible(true);
@@ -99,11 +100,12 @@ public class MenuLogearse extends JFrame implements ActionListener, ChangeListen
                     // break;
                 case 2:
                     Coordinador coordinador = new Coordinador();
-                    MenuCrear menuCrear3 = new MenuCrear(this, coordinador);
+                    MenuCrear menuCrear3 = new MenuCrear(this, universidad, coordinador);
                     menuCrear3.setBounds(0,0,500,300);
                     menuCrear3.setVisible(true);
                     menuCrear3.setLocationRelativeTo(null);
                     this.setVisible(false);
+                    break;
                     // MenuCoordinador menuC = new MenuCoordinador(this);
                     // menuC.setBounds(0,0,400,300);
                     // menuC.setVisible(true);

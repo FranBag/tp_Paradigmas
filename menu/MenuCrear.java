@@ -3,6 +3,7 @@ package TP1_Paradigmas.menu;
 import javax.swing.*;
 import java.awt.event.*;
 
+import TP1_Paradigmas.clases.Universidad;
 import TP1_Paradigmas.usuarios.*;
 
 public class MenuCrear extends JFrame implements ActionListener, ItemListener{
@@ -11,13 +12,18 @@ public class MenuCrear extends JFrame implements ActionListener, ItemListener{
     private JButton boton1, boton2;
     private JComboBox combo1;
 
+    private String seleccion = "Hombre";
+
     private MenuLogearse login;
     private Usuario usuario;
+    private Universidad universidad;
 
 
-    public MenuCrear(MenuLogearse login, Usuario usuario){
+    public MenuCrear(MenuLogearse login, Universidad universidad, Usuario usuario){
         this.login = login;
+        this.universidad = universidad;
         this.usuario = usuario;
+
         setLayout(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -95,8 +101,52 @@ public class MenuCrear extends JFrame implements ActionListener, ItemListener{
 
     public void actionPerformed(ActionEvent e){
         if(e.getSource() == boton1){
-            setTitle("Carrera");
-            input1.getText();
+            usuario.setNombre(input1.getText());
+            usuario.setApellido(input4.getText());
+            usuario.setEmail(input2.getText());
+            usuario.setDni(Integer.valueOf(input3.getText()));
+            usuario.setN_telefono(input5.getText());
+            usuario.setSexo(seleccion);
+            // System.out.println(usuario.getNombre());
+            // System.out.println(usuario.getApellido());
+            // System.out.println(usuario.getEmail());
+            // System.out.println(usuario.getDni());
+            // System.out.println(usuario.getN_telefono());
+            // System.out.println(usuario.getSexo());
+            System.out.println(usuario.getClass());
+            switch(String.valueOf(usuario.getClass())) {
+                case "class TP1_Paradigmas.usuarios.Alumno":
+                    Alumno alumno = ((Alumno) usuario);
+                    alumno.setUniversidad(universidad);
+                    MenuAlumno menuA = new MenuAlumno(login, universidad, alumno);
+                    menuA.setBounds(0,0,400,300);
+                    menuA.setVisible(true);
+                    menuA.setLocationRelativeTo(null);
+                    dispose();
+                    break;
+
+                case "class TP1_Paradigmas.usuarios.Profesor":
+                    MenuProfesor menuP = new MenuProfesor(login);
+                    menuP.setBounds(0,0,400,300);
+                    menuP.setVisible(true);
+                    menuP.setLocationRelativeTo(null);
+                    dispose();
+                    break;
+
+                case "class TP1_Paradigmas.usuarios.Coordinador":
+                    MenuCoordinador menuC = new MenuCoordinador(login);
+                    menuC.setBounds(0,0,400,300);
+                    menuC.setVisible(true);
+                    menuC.setLocationRelativeTo(null);
+                    dispose();
+                    break;    
+
+                default:
+                    JOptionPane.showMessageDialog(null, "Ha ocurrido un error inesperado.",
+                    "Advertencia", JOptionPane.WARNING_MESSAGE);
+                    dispose();
+                    break;
+            }
         }
         if(e.getSource() == boton2){
             login.setVisible(true);
@@ -106,8 +156,7 @@ public class MenuCrear extends JFrame implements ActionListener, ItemListener{
 
     public void itemStateChanged(ItemEvent e){
         if(e.getSource() == combo1){
-          String seleccion = combo1.getSelectedItem().toString();
-          setTitle(seleccion);
+          seleccion = combo1.getSelectedItem().toString();
         }
        }
 }
