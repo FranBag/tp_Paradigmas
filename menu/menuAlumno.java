@@ -81,6 +81,7 @@ public class MenuAlumno extends JFrame implements ActionListener{
 
     public String comprobarCarrera(){
         if(alumno.getCarreraMatriculada() != null){
+            boton1.setEnabled(false);
             return alumno.getCarreraMatriculada().getNombre();
         }else{
             return "Ninguna";
@@ -148,26 +149,25 @@ class MenuMatricularseCarrera extends JFrame implements ActionListener{
         boton2.addActionListener(this);
     }
 
-        public void actionPerformed(ActionEvent e){
-            if(e.getSource() == boton1){
-                int filaSeleccionada = tabla1.getSelectedRow();
-                if(filaSeleccionada == -1) {
-                    JOptionPane.showMessageDialog(null, "Debes seleccionar una carrera.",
-                    "Advertencia", JOptionPane.WARNING_MESSAGE);
-                }else{
-                    System.out.println("HoLA");
-                    alumno.inscribirCarrera(Integer.valueOf(((String) tabla1.getValueAt(filaSeleccionada, 0))));
-                    JOptionPane.showMessageDialog(null, "Matriculación realizada.");
-                    menualumno.actualizarCarrera();
-                    menualumno.setVisible(true);
-                    dispose();
-                }
-            }
-            if(e.getSource() == boton2){
+    public void actionPerformed(ActionEvent e){
+        if(e.getSource() == boton1){
+            int filaSeleccionada = tabla1.getSelectedRow();
+            if(filaSeleccionada == -1) {
+                JOptionPane.showMessageDialog(null, "Debes seleccionar una carrera.",
+                "Advertencia", JOptionPane.WARNING_MESSAGE);
+            }else{
+                alumno.inscribirCarrera(Integer.valueOf(((String) tabla1.getValueAt(filaSeleccionada, 0))));
+                JOptionPane.showMessageDialog(null, "Matriculación realizada.");
+                menualumno.actualizarCarrera();
                 menualumno.setVisible(true);
                 dispose();
             }
         }
+        if(e.getSource() == boton2){
+            menualumno.setVisible(true);
+            dispose();
+        }
+    }
 }
 
 

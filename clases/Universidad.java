@@ -58,7 +58,6 @@ public class Universidad {
             lista_carreras[i][1] = carreras.get(i).getNombre();
             lista_carreras[i][2] = String.valueOf(carreras.get(i).getDuracion());
             lista_carreras[i][3] = String.valueOf(carreras.get(i).getPrecio_inscripcion());
-            System.out.println(carreras);
         }
         return lista_carreras;
     }

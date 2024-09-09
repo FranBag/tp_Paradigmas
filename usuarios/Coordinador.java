@@ -16,6 +16,16 @@ public class Coordinador extends Usuario{
         
     }
 
+    //getter y setter de carrera
+    public Carrera getCarrera(){
+        return carrera;
+    }
+
+    public void setCarrera(Carrera carrera){
+        this. carrera = carrera;
+    }
+
+
     public void asignarProfesor(int n_legajo, int id_materia){
 
     }

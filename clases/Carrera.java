@@ -84,10 +84,19 @@ public class Carrera {
         }
     }
 
-    public void listarAlumnos(){
-        for(int i = 0; i < alumnos.size(); i++){
-            System.out.println(alumnos.get(i).getNombre());
+
+    public String[][] listarAlumnos(){
+        int tamaño_alumnos = alumnos.size();
+        String[][] lista_alumnos = new String[tamaño_alumnos][6];
+        for(int i = 0; i < tamaño_alumnos; i++){
+            lista_alumnos[i][0] = String.valueOf(alumnos.get(i).getDni());
+            lista_alumnos[i][1] = String.valueOf(alumnos.get(i).getN_legajo());
+            lista_alumnos[i][2] = alumnos.get(i).getNombre();
+            lista_alumnos[i][3] = alumnos.get(i).getApellido();
+            lista_alumnos[i][4] = alumnos.get(i).getEmail();
+            lista_alumnos[i][5] = alumnos.get(i).getN_telefono();
         }
+        return lista_alumnos;
     }
 
     public void listarMaterias(){
