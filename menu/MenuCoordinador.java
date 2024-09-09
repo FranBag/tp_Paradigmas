@@ -1,7 +1,6 @@
 package TP1_Paradigmas.menu;
 
-import TP1_Paradigmas.clases.Carrera;
-import TP1_Paradigmas.clases.Universidad;
+import TP1_Paradigmas.clases.*;
 import TP1_Paradigmas.usuarios.Alumno;
 import TP1_Paradigmas.usuarios.Coordinador;
 
@@ -176,3 +175,41 @@ class MenuListarAlumnosCarrera extends JFrame implements ActionListener{
         label1.setText("Carrera: " + comprobarCarrera());
     }
 }
+
+// class MenuListarMateriasCarrera extends JFrame implements ActionListener{
+//     private JLabel label1;
+//     private JButton boton1;
+//     private JTable tabla1;
+//     private JScrollPane scroll;
+
+//     private MenuCoordinador menucoordinador;
+//     private Coordinador coordinador;
+//     private Carrera carrera;
+
+//     public MenuListarMateriasCarrera(MenuCoordinador menucoordinador, Coordinador coordinador){
+//         this.menucoordinador = menucoordinador;
+//         this.coordinador = coordinador;
+//         this.carrera = coordinador.getCarrera();
+
+//         setLayout(null);
+//         setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+//         label1 = new JLabel("Listado de materias dentro de la carrera " + this.comprobarCarrera());
+//         label1.setBounds(5,5,300,30);
+//         add(label1);
+
+//         String[] columnas = {"ID", "Nombre", "Profesor", "Año", "Cuatrimestre"};
+
+//         Materia[] listamaterias = carrera.listarMaterias();
+//         String[][] filas = new String[listamaterias.length][5];
+
+//         for(int i=0; i < listamaterias.length; i++){
+//             filas[i][0] = String.valueOf(listamaterias[i].getOD());
+//             filas[i][1] = String.valueOf(listamaterias[i].getN_legajo());
+//             filas[i][2] = listamaterias[i].getNombre();
+//             filas[i][3] = listamaterias[i].getApellido();
+//             filas[i][4] = listamaterias[i].getEmail();
+//         }
+
+//     }   
+// }

@@ -100,10 +100,8 @@ public class Carrera {
         // return lista_alumnos;
     }
 
-    public void listarMaterias(){
-        for(int i = 0; i < materias.size(); i++){
-            System.out.println(materias.get(i).getNombre());
-        }
+    public Materia[] listarMaterias(){
+        return materias.toArray(new Materia[0]);
     }
 
 }

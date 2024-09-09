@@ -14,9 +14,8 @@ public class Materia {
     private int curso;
     private int cuatrimestre;
     HashMap<String, String> situacion = new HashMap<String, String>();
-    HashMap<String, String> asistencias = new HashMap<String, String>();
+    HashMap<String, Double> asistencias = new HashMap<String, Double>(); // Modificación para almacenar porcentaje de asistencia
     private List<Alumno> alumnos;
-    
 
     public Materia(int id_materia, String nombre, Profesor profesor, int curso, int cuatrimestre){
         alumnos = new ArrayList<>();
@@ -67,24 +66,16 @@ public class Materia {
         this.cuatrimestre = cuatrimestre;
     }
 
-    
-    // Método para inscribir un alumno en la materia
     public void inscribirAlumno(int id_alumno) {
         if (!situacion.containsKey(String.valueOf(id_alumno))) {
             situacion.put(String.valueOf(id_alumno), "Inscripto");
-            asistencias.put(String.valueOf(id_alumno), "0");
+            asistencias.put(String.valueOf(id_alumno), 0.0); // Iniciar con 0% de asistencia
             System.out.println("Alumno " + id_alumno + " inscripto a la materia " + nombre);
         } else {
             System.out.println("El alumno ya está inscrito en esta materia.");
         }
-        public List<Materia> getMaterias() {
-        return materias;
-    }
-}
     }
 
-
-    // Método para cambiar la situación de un alumno
     public void cambiarSituacionAlumno(int id_alumno, String nuevaSituacion) {
         if (situacion.containsKey(String.valueOf(id_alumno))) {
             situacion.put(String.valueOf(id_alumno), nuevaSituacion);
@@ -94,27 +85,37 @@ public class Materia {
         }
     }
 
-    // Método para cargar las asistencias de un alumno
-    public void cargarAsistencias(int id_alumno, int cantidadAsistencias) {
+    public void cargarAsistencias(int id_alumno, double porcentajeAsistencias) {
         if (asistencias.containsKey(String.valueOf(id_alumno))) {
-            asistencias.put(String.valueOf(id_alumno), String.valueOf(cantidadAsistencias));
-            System.out.println("Asistencias del alumno " + id_alumno + " actualizadas a " + cantidadAsistencias);
+            asistencias.put(String.valueOf(id_alumno), porcentajeAsistencias);
+            System.out.println("Asistencias del alumno " + id_alumno + " actualizadas a " + porcentajeAsistencias + "%");
+            actualizarSituacionAlumno(id_alumno); // Actualizar la situación en función de la asistencia
         } else {
             System.out.println("El alumno no está inscrito en esta materia.");
         }
     }
 
-    // Método para listar los alumnos inscritos en la materia
-    public void listarAlumnos() {
+    private void actualizarSituacionAlumno(int id_alumno) {
+        double asistencia = asistencias.get(String.valueOf(id_alumno));
+        if (asistencia < 75.0) {
+            situacion.put(String.valueOf(id_alumno), "Libre");
+        } else {
+            situacion.put(String.valueOf(id_alumno), "Regular");
+        }
+    }
+
+    public List<String[]> listarAlumnos() {
+        List<String[]> listaAlumnos = new ArrayList<>();
         if (situacion.isEmpty()) {
             System.out.println("No hay alumnos inscritos en la materia " + nombre);
         } else {
-            System.out.println("Alumnos inscritos en la materia " + nombre + ":");
             for (String id_alumno : situacion.keySet()) {
                 String estado = situacion.get(id_alumno);
-                String asistencia = asistencias.get(id_alumno);
-                System.out.println("Alumno ID: " + id_alumno + " - Estado: " + estado + " - Inasistencias: " + asistencia);
+                double asistencia = asistencias.get(id_alumno);
+                String[] alumnoInfo = {id_alumno, asistencia + "%", estado};
+                listaAlumnos.add(alumnoInfo);
             }
         }
+        return listaAlumnos;
     }
 }
