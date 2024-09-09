@@ -2,6 +2,7 @@ package TP1_Paradigmas.menu;
 
 import TP1_Paradigmas.app;
 import TP1_Paradigmas.clases.Universidad;
+import TP1_Paradigmas.clases.Carrera;
 import TP1_Paradigmas.usuarios.Alumno;
 
 import javax.swing.*;
@@ -120,7 +121,15 @@ class MenuMatricularseCarrera extends JFrame implements ActionListener{
         
         String[] columnas = {"ID", "Nombre", "Duración", "Precio Inscripción"};
 
-        String[][] filas = universidad.listarCarreras();
+        Carrera[]listacarreras = universidad.listarCarreras();
+        String[][] filas = new String[listacarreras.length][4];
+        
+        for(int i=0; i < listacarreras.length; i++){
+            filas[i][0] = String.valueOf(listacarreras[i].getId_carrera());
+            filas[i][1] = listacarreras[i].getNombre();
+            filas[i][2] = String.valueOf(listacarreras[i].getDuracion());
+            filas[i][3] = String.valueOf(listacarreras[i].getPrecio_inscripcion());
+        }
 
         tabla1 = new JTable(filas, columnas){
             @Override

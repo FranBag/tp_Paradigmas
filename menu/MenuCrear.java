@@ -135,7 +135,7 @@ public class MenuCrear extends JFrame implements ActionListener, ItemListener{
 
                 case "class TP1_Paradigmas.usuarios.Coordinador":
                     Coordinador coordinador = ((Coordinador) usuario);
-                    MenuCoordinador menuC = new MenuCoordinador(login, coordinador);
+                    MenuCoordinador menuC = new MenuCoordinador(universidad, login, coordinador);
                     menuC.setBounds(0,0,400,300);
                     menuC.setVisible(true);
                     menuC.setLocationRelativeTo(null);

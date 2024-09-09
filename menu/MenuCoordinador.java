@@ -1,45 +1,51 @@
 package TP1_Paradigmas.menu;
 
 import TP1_Paradigmas.clases.Carrera;
+import TP1_Paradigmas.clases.Universidad;
+import TP1_Paradigmas.usuarios.Alumno;
 import TP1_Paradigmas.usuarios.Coordinador;
 
 import javax.swing.*;
 import javax.swing.event.*;
 import java.awt.event.*;
 
-public class MenuCoordinador extends JFrame implements ActionListener{
+public class MenuCoordinador extends JFrame implements ActionListener, ItemListener{
     
     private JLabel label1, label2;
     private JButton boton1, boton2, boton3, boton4;
+    private JComboBox combo1;
+
+    Universidad universidad;
     private MenuLogearse login;
     private Coordinador coordinador;
 
-    public MenuCoordinador(MenuLogearse login, Coordinador coordinador){
+    public MenuCoordinador(Universidad universidad, MenuLogearse login, Coordinador coordinador){
+        this.universidad = universidad;
         this.login = login;
         this.coordinador = coordinador;
 
         setLayout(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        label1 = new JLabel("Coordinador: ...");
+        label1 = new JLabel("Alumno: " + coordinador.getNombre() + " " + coordinador.getApellido());
         label1.setBounds(10,10,200,30);
         add(label1);
 
-        label1 = new JLabel("Carrera: ...");
-        label1.setBounds(10,25,200,30);
+        label1 = new JLabel("Carrera:");
+        label1.setBounds(10,30,100,30);
         add(label1);
 
         boton1 = new JButton("Asignar Profesor");
-        boton1.setBounds(10,60,150,30);
+        boton1.setBounds(10,65,150,30);
         add(boton1);
         boton1.addActionListener(this);
 
         boton2 = new JButton("Ver Alumnos");
-        boton2.setBounds(10,100,150,30);
+        boton2.setBounds(10,105,150,30);
         add(boton2);
         boton2.addActionListener(this);
 
         boton3 = new JButton("Ver Materias");
-        boton3.setBounds(10,140,150,30);
+        boton3.setBounds(10,145,150,30);
         add(boton3);
         boton3.addActionListener(this);
 
@@ -47,6 +53,18 @@ public class MenuCoordinador extends JFrame implements ActionListener{
         boton4.setBounds(5,220,80,30);
         add(boton4);
         boton4.addActionListener(this);
+
+        combo1 = new JComboBox();
+        combo1.setBounds(65,35,200,20);
+        add(combo1);
+
+        Carrera[]listacarreras = universidad.listarCarreras();
+        coordinador.setCarrera(listacarreras[0]);
+        for(int i=0; i < listacarreras.length; i++){
+            combo1.addItem(listacarreras[i].getNombre());
+        }
+        combo1.addItemListener(this);
+
     }
 
     public void actionPerformed(ActionEvent e){
@@ -68,6 +86,12 @@ public class MenuCoordinador extends JFrame implements ActionListener{
             dispose();
         }
     }
+
+    public void itemStateChanged(ItemEvent e){
+        if(e.getSource() == combo1){
+          coordinador.setCarrera(universidad.getCarreraByNombre(combo1.getSelectedItem().toString()));
+        }
+       }
 }
 
 
@@ -97,12 +121,18 @@ class MenuListarAlumnosCarrera extends JFrame implements ActionListener{
 
         String[] columnas = {"DNI", "N.Legajo", "Nombre", "Apellido", "Email", "N.Telefono"};
 
-        String[][] filas = carrera.listarAlumnos();
-        /*ARREGLAR, COORDINADOR NO TIENE  CARRERA AL INICIO, PRIMERO AÑADIR OPCION DE
-         * SER DE UNA CARRERA PRIMERO. PUEDO REUTILIZAR MATRICULARSECARRERA DE MENUALUMNO
-         * PERO ME CONVIENE YA CAMBIAR EL getCarreras DE UNIVERSIDDAD PARA QUE DEVUELVA
-         * UNA LISTA DE CARRERAS EN VEZ DE LISTA DE ARRAYS ASI LO MANIPULO DESDE ACÁ.
-        */
+        Alumno[] listaalumnos = carrera.listarAlumnos();
+        String[][] filas = new String[listaalumnos.length][6];
+
+        for(int i=0; i < listaalumnos.length; i++){
+            filas[i][0] = String.valueOf(listaalumnos[i].getDni());
+            filas[i][1] = String.valueOf(listaalumnos[i].getN_legajo());
+            filas[i][2] = listaalumnos[i].getNombre();
+            filas[i][3] = listaalumnos[i].getApellido();
+            filas[i][4] = listaalumnos[i].getEmail();
+            filas[i][5] = listaalumnos[i].getN_telefono();
+        }
+
         tabla1 = new JTable(filas, columnas){
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -136,7 +166,6 @@ class MenuListarAlumnosCarrera extends JFrame implements ActionListener{
 
     public String comprobarCarrera(){
         if(coordinador.getCarrera() != null){
-            boton1.setEnabled(false);
             return coordinador.getCarrera().getNombre();
         }else{
             return "Ninguna";

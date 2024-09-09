@@ -23,6 +23,7 @@ public class Universidad {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
     public Carrera getCarreraByID(int id_carrera) {
         for(int i = 0; i < carreras.size(); i++){
             if(carreras.get(i).getId_carrera() == id_carrera){
@@ -30,6 +31,15 @@ public class Universidad {
             }
         }
         return null; //si no se encuentra una carrera con ese id devuelve null
+    }
+
+    public Carrera getCarreraByNombre(String nombreCarrera) {
+        for(int i = 0; i < carreras.size(); i++){
+            if(carreras.get(i).getNombre() == nombreCarrera){
+                return carreras.get(i);
+            }
+        }
+        return null; //si no se encuentra una carrera con ese nombre devuelve null
     }
 
     //crea una carrera
@@ -50,16 +60,17 @@ public class Universidad {
     }
 
     //lista todas las carreras
-    public String[][] listarCarreras(){
-        int tamaño_carreras = carreras.size();
-        String[][] lista_carreras = new String[tamaño_carreras][4];
-        for(int i = 0; i < tamaño_carreras; i++){
-            lista_carreras[i][0] = String.valueOf(carreras.get(i).getId_carrera());
-            lista_carreras[i][1] = carreras.get(i).getNombre();
-            lista_carreras[i][2] = String.valueOf(carreras.get(i).getDuracion());
-            lista_carreras[i][3] = String.valueOf(carreras.get(i).getPrecio_inscripcion());
-        }
-        return lista_carreras;
+    public Carrera[] listarCarreras(){
+        return carreras.toArray(new Carrera[0]);
+        // int tamaño_carreras = carreras.size();
+        // String[][] lista_carreras = new String[tamaño_carreras][4];
+        // for(int i = 0; i < tamaño_carreras; i++){
+        //     lista_carreras[i][0] = String.valueOf(carreras.get(i).getId_carrera());
+        //     lista_carreras[i][1] = carreras.get(i).getNombre();
+        //     lista_carreras[i][2] = String.valueOf(carreras.get(i).getDuracion());
+        //     lista_carreras[i][3] = String.valueOf(carreras.get(i).getPrecio_inscripcion());
+        // }
+        // return lista_carreras;
     }
 
     public void asignarCoordinador(Coordinador coordinador, int id_carrera){

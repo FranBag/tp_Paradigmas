@@ -17,8 +17,6 @@ public class app {
         menuLogeo.setVisible(true);
         menuLogeo.setLocationRelativeTo(null);
 
-        // UCP.listarCarreras();
-
         Alumno alumno1 = new Alumno(555, "Francisco","Bagneres",
         "f@gmail.com", "Hombre", "376425", 4623, UCP);
 
