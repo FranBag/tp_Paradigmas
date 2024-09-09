@@ -73,7 +73,7 @@ public class MenuCoordinador extends JFrame implements ActionListener, ItemListe
         }
         if(e.getSource() == boton2){
             MenuListarAlumnosCarrera menuLAC = new MenuListarAlumnosCarrera(this, coordinador);
-            menuLAC.setBounds(0,0,600,400);
+            menuLAC.setBounds(0,0,700,400);
             menuLAC.setVisible(true);
             menuLAC.setLocationRelativeTo(null);
             this.setVisible(false);

@@ -10,7 +10,8 @@ public class app {
         Universidad UCP = new Universidad("Cuenca del Plata");
         UCP.crearCarrera(1, "Ingeniería en Sistemas", 5, 60000, 25000);
         UCP.crearCarrera(2, "Licenciatura en Nutrición", 4, 50000, 25000);
-        
+        UCP.crearCarrera(3, "Doctorado en Derecho", 6, 75000, 35000);
+
         // menu de logeo
         MenuLogearse menuLogeo = new MenuLogearse(UCP);
         menuLogeo.setBounds(0,0,400,300);

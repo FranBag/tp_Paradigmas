@@ -22,7 +22,7 @@ public class Coordinador extends Usuario{
     }
 
     public void setCarrera(Carrera carrera){
-        this. carrera = carrera;
+        this.carrera = carrera;
     }
 
 

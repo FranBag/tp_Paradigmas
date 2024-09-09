@@ -1,6 +1,9 @@
 package TP1_Paradigmas.usuarios;
 
+import java.util.Random;
+
 public class Usuario {
+    Random random = new Random();
     private int n_legajo;
     private String nombre;
     private String apellido;
@@ -22,6 +25,7 @@ public class Usuario {
     }
 
     public Usuario(){
+        this.n_legajo = random.nextInt(200);
 
     }
 
