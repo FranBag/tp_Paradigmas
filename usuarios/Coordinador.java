@@ -1,8 +1,7 @@
 package TP1_Paradigmas.usuarios;
 
-import java.util.ArrayList;
-
 import TP1_Paradigmas.clases.Carrera;
+import TP1_Paradigmas.clases.Materia;
 
 public class Coordinador extends Usuario{
     private Carrera carrera;
@@ -22,21 +21,13 @@ public class Coordinador extends Usuario{
     }
 
     public void setCarrera(Carrera carrera){
-        this.carrera = carrera;
+        this. carrera = carrera;
     }
 
 
-    public void asignarProfesor(int n_legajo, int id_materia){
-
-    }
-
-    public void verMaterias(){
-
-    }
-
-    public void verAlumnos(){
-
+    public void asignarProfesor(int n_legajo, int id_materia, Profesor profesor, Materia materia) {
+        materia.setProfesor(profesor);
+        System.out.println("Profesor asignado a la materia con ID: " + id_materia);
     }
 
 }
-

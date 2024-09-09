@@ -1,12 +1,12 @@
 package TP1_Paradigmas.usuarios;
 
+import TP1_Paradigmas.clases.Materia;
 import java.util.ArrayList;
 import java.util.List;
 
-import TP1_Paradigmas.clases.Materia;
-
 public class Profesor extends Usuario{
     private List<Materia> materias;
+    private Materia materia;
 
     
     public Profesor(int n_legajo, String nombre, String apellido,
@@ -20,9 +20,18 @@ public class Profesor extends Usuario{
     }
 
     public void gestionarSituacionAlumno(int id_alumno, String situacion){
-
+        materia.cambiarSituacionAlumno(id_alumno, situacion);
     }
 
-    public void gestionarAsistencia(int id_alumno, int porcentaje){
+    public void verAlumnos(int id_alumno, int porcentaje){
+        List<String[]> alumnos = materia.listarAlumnos();
+        
+        for (String[] alumno : alumnos) {
+            System.out.println("ID: " + alumno[0] + ", Asistencia: " + alumno[1] + ", Estado: " + alumno[2]);
+        }
+    }
+
+    public void gestionarAsistencia(int id_alumno, double porcentajeAsistencias){
+        materia.cargarAsistencias(id_alumno, porcentajeAsistencias);
     }
 }
