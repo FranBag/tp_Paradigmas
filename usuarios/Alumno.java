@@ -20,6 +20,7 @@ public class Alumno extends Usuario {
     }
 
     public Alumno() {
+        this.materiasInscriptas = new ArrayList<>();
     }
 
     // Setter y Getter de universidad
@@ -39,39 +40,30 @@ public class Alumno extends Usuario {
     }
 
     // Método para inscribir al alumno en una materia
-    public void inscribirMateria(int id_materia) {
+    public String inscribirMateria(int id_materia) {
         if (carreraMatriculada != null) {
             Materia materia = buscarMateriaPorID(id_materia);
             if (materia != null) {
                 materia.inscribirAlumno(this);
                 if (!materiasInscriptas.contains(materia)) {
                     materiasInscriptas.add(materia);
-                    System.out.println("Alumno " + getNombre() + " inscrito en la materia " + materia.getNombre());
+                    return("Éxito");
                 } else {
-                    System.out.println("El alumno ya está inscrito en esta materia.");
+                    return("Ya inscripto");
                 }
-            } else {
-                System.out.println("La materia con ID " + id_materia + " no existe.");
             }
-        } else {
-            System.out.println("El alumno no está matriculado en ninguna carrera.");
         }
+        return("No hay materias");
     }
 
     // Método para ver la asistencia del alumno en una materia
-    public void verAsistencia(int id_materia) {
-        if (carreraMatriculada != null) {
-            Materia materia = buscarMateriaPorID(id_materia);
-            if (materia != null && materiasInscriptas.contains(materia)) {
-                String asistencia = String.valueOf(materia.getAsistenciaByNLegajo(getN_legajo()));
-                System.out.println("Asistencias del alumno en " + materia.getNombre() + ": " + asistencia);
-            } else {
-                System.out.println("El alumno no está inscrito en esta materia o la materia no existe.");
-            }
-        } else {
-            System.out.println("El alumno no está matriculado en ninguna carrera.");
-        }
+    public String verAsistencia(int id_materia) {
+        Materia materia = buscarMateriaPorID(id_materia);
+        String asistencia = String.valueOf(materia.getAsistenciaByNLegajo(getN_legajo()));
+        return asistencia;   
     }
+    
+        
 
     // Método para buscar una materia por ID
     private Materia buscarMateriaPorID(int id_materia) {

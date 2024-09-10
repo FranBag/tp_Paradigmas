@@ -8,7 +8,6 @@ import java.util.List;
 
 public class Profesor extends Usuario{
     private List<Materia> materias;
-    private Materia materia;
 
     
     public Profesor(int n_legajo, String nombre, String apellido,
@@ -18,14 +17,14 @@ public class Profesor extends Usuario{
     }
 
     public Profesor(){
-        
+        materias = new ArrayList<>();
     }
 
-    public void gestionarSituacionAlumno(int id_alumno, String situacion){
+    public void gestionarSituacionAlumno(Materia materia, int id_alumno, String situacion){
         materia.cambiarSituacionAlumno(id_alumno, situacion);
     }
 
-    public void verAlumnos(int id_alumno, int porcentaje){
+    public void verAlumnos(int id_alumno){
         List<String[]> alumnos = materia.listarAlumnos();
         
         for (String[] alumno : alumnos) {

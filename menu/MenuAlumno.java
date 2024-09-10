@@ -1,8 +1,7 @@
 package TP1_Paradigmas.menu;
 
 import TP1_Paradigmas.app;
-import TP1_Paradigmas.clases.Universidad;
-import TP1_Paradigmas.clases.Carrera;
+import TP1_Paradigmas.clases.*;
 import TP1_Paradigmas.usuarios.Alumno;
 
 import javax.swing.*;
@@ -34,10 +33,6 @@ public class MenuAlumno extends JFrame implements ActionListener{
         label2 = new JLabel("DNI: " + alumno.getDni());
         label2.setBounds(250,10,200,30);
         add(label2);
-
-        label3 = new JLabel("Carrera: " + comprobarCarrera());
-        label3.setBounds(10,25,200,30);
-        add(label3);
         
         boton1 = new JButton("Matricularse Carrera");
         boton1.setBounds(10,60,180,30);
@@ -58,21 +53,33 @@ public class MenuAlumno extends JFrame implements ActionListener{
         boton4.setBounds(5,220,80,30);
         add(boton4);
         boton4.addActionListener(this);
+
+        label3 = new JLabel("Carrera: " + comprobarCarrera());
+        label3.setBounds(10,25,200,30);
+        add(label3);
     }
 
     public void actionPerformed(ActionEvent e){
         if(e.getSource() == boton1){
-            MenuMatricularseCarrera menuT = new MenuMatricularseCarrera(universidad, this, alumno);
-            menuT.setBounds(0,0,600,400);
-            menuT.setVisible(true);
-            menuT.setLocationRelativeTo(null);
+            MenuMatricularseCarrera menuMC = new MenuMatricularseCarrera(universidad, this, alumno);
+            menuMC.setBounds(0,0,600,400);
+            menuMC.setVisible(true);
+            menuMC.setLocationRelativeTo(null);
             this.setVisible(false);
         }
         if(e.getSource() == boton2){
-            setTitle("Materia");
+            MenuInscribirseMateria menuIM = new MenuInscribirseMateria(this, alumno);
+            menuIM.setBounds(0,0,600,400);
+            menuIM.setVisible(true);
+            menuIM.setLocationRelativeTo(null);
+            this.setVisible(false);
         }
         if(e.getSource() == boton3){
-            setTitle("Asistencia");
+            MenuVerAsistencia menuVA = new MenuVerAsistencia(this, alumno);
+            menuVA.setBounds(0,0,600,400);
+            menuVA.setVisible(true);
+            menuVA.setLocationRelativeTo(null);
+            this.setVisible(false);
         }
         if(e.getSource() == boton4){
             login.setVisible(true);
@@ -83,8 +90,12 @@ public class MenuAlumno extends JFrame implements ActionListener{
     public String comprobarCarrera(){
         if(alumno.getCarreraMatriculada() != null){
             boton1.setEnabled(false);
+            boton2.setEnabled(true);
+            boton3.setEnabled(true);
             return alumno.getCarreraMatriculada().getNombre();
         }else{
+            boton2.setEnabled(false);
+            boton3.setEnabled(false);
             return "Ninguna";
         }
     }
@@ -180,71 +191,160 @@ class MenuMatricularseCarrera extends JFrame implements ActionListener{
 }
 
 
-// //menu para inscribirse a una o mas materias de una carrera
-// class MenuInscribirseMateria extends JFrame implements ActionListener{
-//     private JLabel label1, label2;
-//     private JButton boton1, boton2;
-//     private JTable tabla1;
-//     private JScrollPane scroll;
-//     private MenuAlumno menualumno;
+//menu para inscribirse a una o mas materias de una carrera
+class MenuInscribirseMateria extends JFrame implements ActionListener{
+    private JLabel label1, label2;
+    private JButton boton1, boton2;
+    private JTable tabla1;
+    private JScrollPane scroll;
 
-//     public MenuInscribirseMateria(Universidad universidad, MenuAlumno menualumno){
-//         this.menualumno = menualumno;
-//         setLayout(null);
-//         setDefaultCloseOperation(EXIT_ON_CLOSE);
+    private MenuAlumno menualumno;
+    private Alumno alumno;
+    private Carrera carrera;
 
-//         label1 = new JLabel("Listado de materias dentro de la carrera "+ this.carrera);
-//         label1.setBounds(5,5,300,30);
-//         add(label1);
+    public MenuInscribirseMateria(MenuAlumno menualumno, Alumno alumno){
+        this.carrera = alumno.getCarreraMatriculada();
+        this.menualumno = menualumno;
+        this.alumno = alumno;
 
-//         label1 = new JLabel("Nombre / Duración / P.Inscripción");
-//         label1.setBounds(5,25,600,30);
-//         add(label1);
-        
-//         String[] columnas = {"Nombre", "Duración", "Precio Inscripción"};
+        setLayout(null);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-//         String[][] filas = universidad.listarCarreras();
+        label1 = new JLabel("Listado de materias dentro de la carrera " + carrera.getNombre());
+        label1.setBounds(5,5,300,30);
+        add(label1);
 
-//         tabla1 = new JTable(filas, columnas){
-//             @Override
-//             public boolean isCellEditable(int row, int column) {
-//                 return false;
-//             }
-//         };
-//         tabla1.setBounds(5,50,500,220);
+        String[] columnas = {"ID", "Nombre", "Profesor", "Año", "Cuatrimestre"};
 
-//         scroll = new JScrollPane(tabla1);
-//         add(tabla1);
+        Materia[] listamaterias = carrera.listarMaterias();
+        String[][] filas = new String[listamaterias.length][5];
 
-//         boton1 = new JButton("Matricularse");
-//         boton1.setBounds(10,280,120,30);
-//         add(boton1);
-//         boton1.addActionListener(this);
+        String celdaprofe = "Nadie";
+        for(int i=0; i < listamaterias.length; i++){
+            if(listamaterias[i].getProfesor() != null){
+                celdaprofe =  (listamaterias[i].getProfesor().getNombre() + " " +
+                listamaterias[i].getProfesor().getApellido());
+            }
+            filas[i][0] = String.valueOf(listamaterias[i].getId_materia());
+            filas[i][1] = listamaterias[i].getNombre();
+            filas[i][2] = celdaprofe;
+            filas[i][3] = String.valueOf(listamaterias[i].getCurso());
+            filas[i][4] = String.valueOf(listamaterias[i].getCuatrimestre());
+        }
+        tabla1 = new JTable(filas, columnas){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        tabla1.setRowHeight(20);
+        tabla1.getColumnModel().getColumn(0).setPreferredWidth(25);
+        tabla1.getColumnModel().getColumn(1).setPreferredWidth(120);
+        tabla1.getColumnModel().getColumn(2).setPreferredWidth(120);
+        tabla1.getColumnModel().getColumn(3).setPreferredWidth(25);
+        tabla1.getColumnModel().getColumn(4).setPreferredWidth(25);
 
-//         boton2 = new JButton("Volver");
-//         boton2.setBounds(10,320,80,30);
-//         add(boton2);
-//         boton2.addActionListener(this);
-//     }
+        scroll = new JScrollPane(tabla1);
+        scroll.setBounds(5,50,500,220);
+        add(scroll);
 
-//         public void actionPerformed(ActionEvent e){
-//             if(e.getSource() == boton1){
-//                 int filaSeleccionada = tabla1.getSelectedRow();
-//                 if(filaSeleccionada == -1) {
-//                     JOptionPane.showMessageDialog(null, "Debes seleccionar una carrera.",
-//                     "Advertencia", JOptionPane.WARNING_MESSAGE);
-//                 }else{
-//                     JOptionPane.showMessageDialog(null, "Matriculación realizada.");
-//                     menualumno.setVisible(true);
-//                     menualumno.revalidate();
-//                     dispose();
-//                 }
-//             }
-//             if(e.getSource() == boton2){
-//                 menualumno.repaint();
-//                 menualumno.setVisible(true);
-//                 menualumno.repaint();
-//                 dispose();
-//             }
-//         }
-// }
+        boton1 = new JButton("Matricularse");
+        boton1.setBounds(10,280,120,30);
+        add(boton1);
+        boton1.addActionListener(this);
+
+        boton2 = new JButton("Volver");
+        boton2.setBounds(10,320,80,30);
+        add(boton2);
+        boton2.addActionListener(this);
+    }
+
+    public void actionPerformed(ActionEvent e){
+        if(e.getSource() == boton1){
+            int filaSeleccionada = tabla1.getSelectedRow();
+            if(filaSeleccionada == -1) {
+                JOptionPane.showMessageDialog(null, "Debes seleccionar una materia.",
+                "Advertencia", JOptionPane.WARNING_MESSAGE);
+            }else{
+                String resultado = alumno.inscribirMateria(Integer.valueOf(((String) tabla1.getValueAt(filaSeleccionada, 0))));
+                switch(resultado) {
+                    case "Éxito":
+                        JOptionPane.showMessageDialog(null, "Inscripción realizada.");
+                        break;
+                
+                    case "Ya inscripto":
+                        JOptionPane.showMessageDialog(null, "Ya se encuentra inscripto en esta materia.",
+                        "Advertencia", JOptionPane.WARNING_MESSAGE);
+                        break;
+                }
+
+                menualumno.setVisible(true);
+                dispose();
+            }
+        }
+        if(e.getSource() == boton2){
+            menualumno.setVisible(true);
+            dispose();
+        }
+    }
+}
+
+class MenuVerAsistencia extends JFrame implements ActionListener{
+    private JLabel label1;
+    private JButton boton1;
+    private JTable tabla1;
+    private JScrollPane scroll;
+
+    private MenuAlumno menualumno;
+    private Alumno alumno;
+    private Carrera carrera;
+
+    
+    public MenuVerAsistencia(MenuAlumno menualumno, Alumno alumno){
+        this.menualumno = menualumno;
+        this.alumno = alumno;
+        this.carrera = alumno.getCarreraMatriculada();
+
+        setLayout(null);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+        label1 = new JLabel("Listado de asistencias de " + alumno.getNombre() + " " + alumno.getApellido());
+        label1.setBounds(5,5,300,30);
+        add(label1);
+
+        String[] columnas = {"Materia", "Porcentaje de Asistencia"};
+
+        Materia[] listamaterias = alumno.getMateriasInscriptas().toArray(new Materia[0]);
+        String[][] filas = new String[listamaterias.length][2];
+
+        for(int i=0; i < listamaterias.length; i++){
+            filas[i][0] = listamaterias[i].getNombre();
+            filas[i][1] = alumno.verAsistencia(listamaterias[i].getId_materia());
+        }
+        tabla1 = new JTable(filas, columnas){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        tabla1.setRowHeight(30);
+        tabla1.getColumnModel().getColumn(0).setPreferredWidth(120);
+        tabla1.getColumnModel().getColumn(1).setPreferredWidth(80);
+
+        scroll = new JScrollPane(tabla1);
+        scroll.setBounds(5,50,500,220);
+        add(scroll);
+
+        boton1 = new JButton("Volver");
+        boton1.setBounds(10,320,80,30);
+        add(boton1);
+        boton1.addActionListener(this);
+    }
+
+    public void actionPerformed(ActionEvent e){
+        if(e.getSource() == boton1){
+            menualumno.setVisible(true);
+            dispose();
+        }
+    }
+}

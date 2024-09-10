@@ -126,7 +126,8 @@ public class MenuCrear extends JFrame implements ActionListener, ItemListener{
                     break;
 
                 case "class TP1_Paradigmas.usuarios.Profesor":
-                    MenuProfesor menuP = new MenuProfesor(login);
+                    Profesor profesor = ((Profesor) usuario);
+                    MenuProfesor menuP = new MenuProfesor(login, profesor);
                     menuP.setBounds(0,0,400,300);
                     menuP.setVisible(true);
                     menuP.setLocationRelativeTo(null);
