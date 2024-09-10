@@ -32,6 +32,14 @@ public class Alumno extends Usuario {
         this.universidad = universidad;
     }
 
+    public Carrera getCarreraMatriculada() {
+        return carreraMatriculada;
+    }
+
+    public List<Materia> getMateriasInscriptas() {
+        return materiasInscriptas;
+    }
+
     // Método para inscribir al alumno en una carrera
     public void inscribirCarrera(int id_carrera) {
         Carrera carreraInscribir = universidad.getCarreraByID(id_carrera);
@@ -64,7 +72,6 @@ public class Alumno extends Usuario {
     }
     
         
-
     // Método para buscar una materia por ID
     private Materia buscarMateriaPorID(int id_materia) {
         if (carreraMatriculada != null) {
@@ -77,11 +84,4 @@ public class Alumno extends Usuario {
         return null;
     }
 
-    public Carrera getCarreraMatriculada() {
-        return carreraMatriculada;
-    }
-
-    public List<Materia> getMateriasInscriptas() {
-        return materiasInscriptas;
-    }
 }

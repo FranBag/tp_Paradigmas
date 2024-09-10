@@ -1,8 +1,7 @@
 package TP1_Paradigmas.menu;
 
 import TP1_Paradigmas.clases.*;
-import TP1_Paradigmas.usuarios.Alumno;
-import TP1_Paradigmas.usuarios.Coordinador;
+import TP1_Paradigmas.usuarios.*;
 
 import javax.swing.*;
 import javax.swing.event.*;
@@ -10,7 +9,7 @@ import java.awt.event.*;
 
 public class MenuCoordinador extends JFrame implements ActionListener, ItemListener{
     
-    private JLabel label1, label2;
+    private JLabel label1;
     private JButton boton1, boton2, boton3, boton4;
     private JComboBox combo1;
 
@@ -68,7 +67,11 @@ public class MenuCoordinador extends JFrame implements ActionListener, ItemListe
 
     public void actionPerformed(ActionEvent e){
         if(e.getSource() == boton1){
-            setTitle("Carrera");
+            MenuAsignarProfesor menuAsignarProfesor = new MenuAsignarProfesor(universidad, this, coordinador);
+            menuAsignarProfesor.setBounds(0, 0, 350, 170);
+            menuAsignarProfesor.setVisible(true);
+            menuAsignarProfesor.setLocationRelativeTo(null);
+            this.setVisible(false);
         }
         if(e.getSource() == boton2){
             MenuListarAlumnosCarrera menuLAC = new MenuListarAlumnosCarrera(this, coordinador);
@@ -97,6 +100,100 @@ public class MenuCoordinador extends JFrame implements ActionListener, ItemListe
        }
 }
 
+
+class MenuAsignarProfesor extends JFrame implements ActionListener {
+    private JLabel label1, label2, label3;
+    private JComboBox<String> comboMaterias, comboProfesores;
+    private JButton botonAsignar, botonVolver;
+
+    private Coordinador coordinador;
+    private Universidad universidad;
+    private MenuCoordinador menuCoordinador;
+
+    public MenuAsignarProfesor(Universidad universidad, MenuCoordinador menuCoordinador, Coordinador coordinador) {
+        this.universidad = universidad;
+        this.menuCoordinador = menuCoordinador;
+        this.coordinador = coordinador;
+
+        setLayout(null);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setTitle("Asignar Profesor a Materia");
+
+        label1 = new JLabel("Materia:");
+        label1.setBounds(10, 10, 100, 30);
+        add(label1);
+
+        comboMaterias = new JComboBox<>();
+        comboMaterias.setBounds(120, 10, 200, 30);
+        add(comboMaterias);
+
+        label2 = new JLabel("Profesor:");
+        label2.setBounds(10, 50, 100, 30);
+        add(label2);
+
+        comboProfesores = new JComboBox<>();
+        comboProfesores.setBounds(120, 50, 200, 30);
+        add(comboProfesores);
+
+        botonAsignar = new JButton("Asignar");
+        botonAsignar.setBounds(10, 90, 100, 30);
+        add(botonAsignar);
+        botonAsignar.addActionListener(this);
+
+        botonVolver = new JButton("Volver");
+        botonVolver.setBounds(120, 90, 100, 30);
+        add(botonVolver);
+        botonVolver.addActionListener(this);
+
+        cargarDatos();
+        setBounds(100, 100, 350, 170);
+        setLocationRelativeTo(null);
+    }
+
+    private void cargarDatos() {
+        // Cargar materias al comboMaterias
+        Carrera carrera = coordinador.getCarrera();
+        if (carrera != null) {
+            Materia[] materias = carrera.listarMaterias();
+            for (Materia materia : materias) {
+                comboMaterias.addItem(materia.getNombre());
+            }
+        }
+
+        // Cargar profesores al comboProfesores
+        Profesor[] profesores = universidad.listarProfesores();
+        for (Profesor profesor : profesores) {
+            comboProfesores.addItem(profesor.getNombre() + " " + profesor.getApellido());
+        }
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == botonAsignar) {
+            String materiaNombre = (String) comboMaterias.getSelectedItem();
+            String profesorNombre = (String) comboProfesores.getSelectedItem();
+
+            if (materiaNombre != null && profesorNombre != null) {
+                Materia materia = coordinador.getCarrera().getMateriaByNombre(materiaNombre);
+                Profesor profesor = universidad.getProfesorByNombre(profesorNombre);
+
+                if (materia != null && profesor != null) {
+                    coordinador.asignarProfesor(materia.getId_materia(), profesor);
+                    JOptionPane.showMessageDialog(this, "Profesor asignado correctamente.");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Materia o Profesor no encontrado.");
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Por favor seleccione una materia y un profesor.");
+            }
+        }
+
+        if (e.getSource() == botonVolver) {
+            menuCoordinador.setVisible(true);
+            dispose();
+        }
+    }
+}
 
 //clase para listar los alumnos de una carrera
 class MenuListarAlumnosCarrera extends JFrame implements ActionListener{

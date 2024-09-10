@@ -77,6 +77,15 @@ public class Carrera {
         return null; //si no se encuentra una materia con ese id devuelve null
     }
 
+    public Materia getMateriaByNombre(String nombre){
+        for(int i = 0; i < materias.size(); i++){
+            if(materias.get(i).getNombre() == nombre){
+                return materias.get(i);
+            }
+        }
+        return null; //si no se encuentra una materia con ese nombre devuelve null
+    }
+
     //matriculacion de alumnos
     public void matricularAlumno(Alumno alumno){
         this.alumnos.add(alumno);

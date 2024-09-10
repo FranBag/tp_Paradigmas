@@ -25,8 +25,8 @@ public class Coordinador extends Usuario{
     }
 
     public void asignarProfesor(int id_materia, Profesor profesor) {
+        profesor.setMaterias(carrera.getMateriaByID(id_materia));
         carrera.getMateriaByID(id_materia).setProfesor(profesor);
-        System.out.println("Profesor asignado a la materia con ID: " + id_materia);
     }
 
 }

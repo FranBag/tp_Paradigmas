@@ -65,14 +65,25 @@ public class Materia {
         this.cuatrimestre = cuatrimestre;
     }
 
+    public Alumno[] getAlumnos(){
+        return alumnos.toArray(new Alumno[0]);
+    }
+
     public Double getAsistenciaByNLegajo(int n_legajo) {
         String legajo = String.valueOf(n_legajo);
         if (asistencias.containsKey(legajo)) {
             return asistencias.get(legajo);
-        } else {
-            System.out.println("El alumno con legajo " + n_legajo + " no está inscrito en esta materia.");
-            return null; // Si el alumno no está inscrito, se devuelve null
         }
+        return null; // Si el alumno no está inscrito, se devuelve null
+    
+    }
+    
+    public String getSituacionByNLegajo(int n_legajo) {
+        String legajo = String.valueOf(n_legajo);
+        if (situacion.containsKey(legajo)) {
+            return situacion.get(legajo);
+        }
+        return null; // Si el alumno no está inscrito, se devuelve null
     }
     
 
@@ -82,28 +93,19 @@ public class Materia {
             situacion.put(n_legajo, "Inscripto");
             asistencias.put(n_legajo, 0.0); // Iniciar con 0% de asistencia
             alumnos.add(alumno);
-            System.out.println("Alumno " + n_legajo + " inscripto a la materia " + nombre);
-        } else {
-            System.out.println("El alumno ya está inscrito en esta materia.");
         }
     }
 
     public void cambiarSituacionAlumno(int id_alumno, String nuevaSituacion) {
         if (situacion.containsKey(String.valueOf(id_alumno))) {
             situacion.put(String.valueOf(id_alumno), nuevaSituacion);
-            System.out.println("Situación del alumno " + id_alumno + " cambiada a " + nuevaSituacion);
-        } else {
-            System.out.println("El alumno no está inscrito en esta materia.");
         }
     }
 
     public void cargarAsistencias(int id_alumno, double porcentajeAsistencias) {
         if (asistencias.containsKey(String.valueOf(id_alumno))) {
             asistencias.put(String.valueOf(id_alumno), porcentajeAsistencias);
-            System.out.println("Asistencias del alumno " + id_alumno + " actualizadas a " + porcentajeAsistencias + "%");
             actualizarSituacionAlumno(id_alumno); // Actualizar la situación en función de la asistencia
-        } else {
-            System.out.println("El alumno no está inscrito en esta materia.");
         }
     }
 
