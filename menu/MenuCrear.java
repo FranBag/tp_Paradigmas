@@ -107,12 +107,7 @@ public class MenuCrear extends JFrame implements ActionListener, ItemListener{
             usuario.setDni(Integer.valueOf(input3.getText()));
             usuario.setN_telefono(input5.getText());
             usuario.setSexo(seleccion);
-            // System.out.println(usuario.getNombre());
-            // System.out.println(usuario.getApellido());
-            // System.out.println(usuario.getEmail());
-            // System.out.println(usuario.getDni());
-            // System.out.println(usuario.getN_telefono());
-            // System.out.println(usuario.getSexo());
+
             System.out.println(usuario.getClass());
             switch(String.valueOf(usuario.getClass())) {
                 case "class TP1_Paradigmas.usuarios.Alumno":

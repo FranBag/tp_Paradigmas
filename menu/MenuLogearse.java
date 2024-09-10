@@ -78,12 +78,7 @@ public class MenuLogearse extends JFrame implements ActionListener, ChangeListen
                     menuCrear1.setLocationRelativeTo(null);
                     this.setVisible(false);
                     break;
-                    // MenuAlumno menuA = new MenuAlumno(this, universidad);
-                    // menuA.setBounds(0,0,400,300);
-                    // menuA.setVisible(true);
-                    // menuA.setLocationRelativeTo(null);
-                    // this.setVisible(false);
-                    // break;
+
                 case 1:
                     Profesor profesor = new Profesor();
                     MenuCrear menuCrear2 = new MenuCrear(this, universidad, profesor);
@@ -92,12 +87,7 @@ public class MenuLogearse extends JFrame implements ActionListener, ChangeListen
                     menuCrear2.setLocationRelativeTo(null);
                     this.setVisible(false);
                     break;
-                    // MenuProfesor menuP = new MenuProfesor(this);
-                    // menuP.setBounds(0,0,400,300);
-                    // menuP.setVisible(true);
-                    // menuP.setLocationRelativeTo(null);
-                    // this.setVisible(false);
-                    // break;
+
                 case 2:
                     Coordinador coordinador = new Coordinador();
                     MenuCrear menuCrear3 = new MenuCrear(this, universidad, coordinador);
@@ -106,12 +96,7 @@ public class MenuLogearse extends JFrame implements ActionListener, ChangeListen
                     menuCrear3.setLocationRelativeTo(null);
                     this.setVisible(false);
                     break;
-                    // MenuCoordinador menuC = new MenuCoordinador(this);
-                    // menuC.setBounds(0,0,400,300);
-                    // menuC.setVisible(true);
-                    // menuC.setLocationRelativeTo(null);
-                    // this.setVisible(false);
-                    // break;
+
             }
 
         }
