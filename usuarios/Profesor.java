@@ -7,17 +7,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Profesor extends Usuario{
+    private Universidad universidad;
     private List<Materia> materias;
 
     
     public Profesor(int n_legajo, String nombre, String apellido,
-    String email, String sexo, String n_telefono, int dni) {
+    String email, String sexo, String n_telefono, int dni, Universidad universidad) {
         super(n_legajo, nombre, apellido, email, sexo, n_telefono, dni);
+        this.universidad = universidad;
+        universidad.añadirProfesor(this);
         materias = new ArrayList<>();
     }
 
     public Profesor(){
         materias = new ArrayList<>();
+    }
+
+    // Setter y Getter de universidad
+    public Universidad getUniversidad() {
+        return universidad;
+    }
+
+    public void setUniversidad(Universidad universidad) {
+        universidad.añadirProfesor(this);
+        this.universidad = universidad;
     }
 
     public Materia[] getMaterias(){
@@ -46,10 +59,13 @@ public class Profesor extends Usuario{
     }
 
     public String[][] verAlumnos(Materia materia) {
-        // Obtener los alumnos de la materia
+
         Alumno[] alumnos = materia.getAlumnos();
         
-        // Crear un array de strings con el tamaño de la cantidad de alumnos y 5 columnas
+        if(alumnos == null || alumnos.length == 0) {
+            return null;
+        }
+
         String[][] datosAlumnos = new String[alumnos.length][5];
         
         for (int i = 0; i < alumnos.length; i++) {
@@ -60,8 +76,7 @@ public class Profesor extends Usuario{
             Double asistencia = materia.getAsistenciaByNLegajo(alumno.getN_legajo());
             String situacion = materia.getSituacionByNLegajo(alumno.getN_legajo());
     
-            // Llenar cada fila del array con los datos del alumno
-            datosAlumnos[i][0] = nLegajo;  // Número de legajo
+            datosAlumnos[i][0] = nLegajo;
             datosAlumnos[i][1] = nombre;
             datosAlumnos[i][2] = apellido;
             datosAlumnos[i][3] = asistencia != null ? asistencia.toString() + "%" : "Sin datos";
@@ -69,5 +84,10 @@ public class Profesor extends Usuario{
         }
     
         return datosAlumnos;
+    }
+
+    @Override
+    public String toString() {
+        return this.getNombre() + " " + this.getApellido();
     }
 }    

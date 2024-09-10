@@ -49,11 +49,13 @@ public class app {
         alumno1.inscribirCarrera(1);
 
 
-        // Profesor profesor1 = new Profesor(222, "Jorge", "Roman", "romancito@hotmail.com",
-        // "Hombre", "3751556423", 25659645);
+        Profesor profesor1 = new Profesor(222, "Jorge", "Roman", "romancito@hotmail.com",
+        "Hombre", "3751556423", 25659645, UCP);
 
-        // UCP.getCarreraByID(1).getCoordinador().asignarProfesor(1, profesor1);
-        // UCP.getCarreraByID(1).getCoordinador().asignarProfesor(4, profesor1);
+
+        UCP.getCarreraByID(1).getCoordinador().asignarProfesor(1, profesor1);
+        UCP.getCarreraByID(1).getCoordinador().asignarProfesor(4, profesor1);
+        System.out.println(UCP.getProfesorByNLegajo(222).getMaterias()[0].getNombre());
 
 
         // UCP.getCarreraByID(1).listarAlumnos();

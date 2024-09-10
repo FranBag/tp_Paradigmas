@@ -45,6 +45,14 @@ public class Universidad {
         return null; //si no se encuentra una carrera con ese nombre devuelve null
     }
 
+    public Profesor getProfesorByNLegajo(int n_legajo) {
+        for (Profesor profesor : profesores) {
+            if (profesor.getN_legajo() == n_legajo) {
+                return profesor;
+            }
+        }
+        return null; // Si no se encuentra un profesor con ese nombre, devuelve null
+    }
     public Profesor getProfesorByNombre(String nombre) {
         for (Profesor profesor : profesores) {
             if ((profesor.getNombre() + " " + profesor.getApellido()).equals(nombre)) {
@@ -86,11 +94,8 @@ public class Universidad {
     }
 
     public void asignarCoordinador(Coordinador coordinador, int id_carrera){
-        for(int i = 0; i < carreras.size(); i++){
-            if(carreras.get(i).getId_carrera() == id_carrera){
-                carreras.get(i).setCoordinador(coordinador);
-                break;
-            }
-        }
+        Carrera carreraAsignar = getCarreraByID(id_carrera);
+        coordinador.setCarrera(carreraAsignar);
+        carreraAsignar.setCoordinador(coordinador);
     }
 }
