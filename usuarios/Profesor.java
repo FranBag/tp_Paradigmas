@@ -1,6 +1,8 @@
 package TP1_Paradigmas.usuarios;
 
 import TP1_Paradigmas.clases.Materia;
+import TP1_Paradigmas.clases.Universidad;
+
 import java.util.ArrayList;
 import java.util.List;
 

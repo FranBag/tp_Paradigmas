@@ -24,9 +24,8 @@ public class Coordinador extends Usuario{
         this. carrera = carrera;
     }
 
-
-    public void asignarProfesor(int n_legajo, int id_materia, Profesor profesor, Materia materia) {
-        materia.setProfesor(profesor);
+    public void asignarProfesor(int id_materia, Profesor profesor) {
+        carrera.getMateriaByID(id_materia).setProfesor(profesor);
         System.out.println("Profesor asignado a la materia con ID: " + id_materia);
     }
 

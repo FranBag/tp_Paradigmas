@@ -78,7 +78,11 @@ public class MenuCoordinador extends JFrame implements ActionListener, ItemListe
             this.setVisible(false);
         }
         if(e.getSource() == boton3){
-            setTitle("Asistencia");
+            MenuListarMateriasCarrera menuLMC = new MenuListarMateriasCarrera(this, coordinador);
+            menuLMC.setBounds(0,0,600,400);
+            menuLMC.setVisible(true);
+            menuLMC.setLocationRelativeTo(null);
+            this.setVisible(false);
         }
         if(e.getSource() == boton4){
             login.setVisible(true);
@@ -131,7 +135,6 @@ class MenuListarAlumnosCarrera extends JFrame implements ActionListener{
             filas[i][4] = listaalumnos[i].getEmail();
             filas[i][5] = listaalumnos[i].getN_telefono();
         }
-
         tabla1 = new JTable(filas, columnas){
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -139,11 +142,11 @@ class MenuListarAlumnosCarrera extends JFrame implements ActionListener{
             }
         };
         tabla1.setRowHeight(20);
-        tabla1.getColumnModel().getColumn(0).setPreferredWidth(100);
-        tabla1.getColumnModel().getColumn(1).setPreferredWidth(50);
-        tabla1.getColumnModel().getColumn(2).setPreferredWidth(100);
-        tabla1.getColumnModel().getColumn(3).setPreferredWidth(100);
-        tabla1.getColumnModel().getColumn(4).setPreferredWidth(200);
+        tabla1.getColumnModel().getColumn(0).setPreferredWidth(80);
+        tabla1.getColumnModel().getColumn(1).setPreferredWidth(60);
+        tabla1.getColumnModel().getColumn(2).setPreferredWidth(110);
+        tabla1.getColumnModel().getColumn(3).setPreferredWidth(110);
+        tabla1.getColumnModel().getColumn(4).setPreferredWidth(150);
         tabla1.getColumnModel().getColumn(5).setPreferredWidth(100);
 
         scroll = new JScrollPane(tabla1);
@@ -176,40 +179,81 @@ class MenuListarAlumnosCarrera extends JFrame implements ActionListener{
     }
 }
 
-// class MenuListarMateriasCarrera extends JFrame implements ActionListener{
-//     private JLabel label1;
-//     private JButton boton1;
-//     private JTable tabla1;
-//     private JScrollPane scroll;
+class MenuListarMateriasCarrera extends JFrame implements ActionListener{
+    private JLabel label1;
+    private JButton boton1;
+    private JTable tabla1;
+    private JScrollPane scroll;
 
-//     private MenuCoordinador menucoordinador;
-//     private Coordinador coordinador;
-//     private Carrera carrera;
+    private MenuCoordinador menucoordinador;
+    private Coordinador coordinador;
+    private Carrera carrera;
 
-//     public MenuListarMateriasCarrera(MenuCoordinador menucoordinador, Coordinador coordinador){
-//         this.menucoordinador = menucoordinador;
-//         this.coordinador = coordinador;
-//         this.carrera = coordinador.getCarrera();
+    public MenuListarMateriasCarrera(MenuCoordinador menucoordinador, Coordinador coordinador){
+        this.menucoordinador = menucoordinador;
+        this.coordinador = coordinador;
+        this.carrera = coordinador.getCarrera();
 
-//         setLayout(null);
-//         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setLayout(null);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-//         label1 = new JLabel("Listado de materias dentro de la carrera " + this.comprobarCarrera());
-//         label1.setBounds(5,5,300,30);
-//         add(label1);
+        label1 = new JLabel("Listado de materias dentro de la carrera " + this.comprobarCarrera());
+        label1.setBounds(5,5,300,30);
+        add(label1);
 
-//         String[] columnas = {"ID", "Nombre", "Profesor", "Año", "Cuatrimestre"};
+        String[] columnas = {"ID", "Nombre", "Profesor", "Año", "Cuatrimestre"};
 
-//         Materia[] listamaterias = carrera.listarMaterias();
-//         String[][] filas = new String[listamaterias.length][5];
+        Materia[] listamaterias = carrera.listarMaterias();
+        String[][] filas = new String[listamaterias.length][5];
 
-//         for(int i=0; i < listamaterias.length; i++){
-//             filas[i][0] = String.valueOf(listamaterias[i].getOD());
-//             filas[i][1] = String.valueOf(listamaterias[i].getN_legajo());
-//             filas[i][2] = listamaterias[i].getNombre();
-//             filas[i][3] = listamaterias[i].getApellido();
-//             filas[i][4] = listamaterias[i].getEmail();
-//         }
+        String celdaprofe = "Nadie";
+        for(int i=0; i < listamaterias.length; i++){
+            if(listamaterias[i].getProfesor() != null){
+                celdaprofe =  (listamaterias[i].getProfesor().getNombre() + " " +
+                listamaterias[i].getProfesor().getApellido());
+            }
+            filas[i][0] = String.valueOf(listamaterias[i].getId_materia());
+            filas[i][1] = listamaterias[i].getNombre();
+            filas[i][2] = celdaprofe;
+            filas[i][3] = String.valueOf(listamaterias[i].getCurso());
+            filas[i][4] = String.valueOf(listamaterias[i].getCuatrimestre());
+        }
+        tabla1 = new JTable(filas, columnas){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        tabla1.setRowHeight(20);
+        tabla1.getColumnModel().getColumn(0).setPreferredWidth(25);
+        tabla1.getColumnModel().getColumn(1).setPreferredWidth(120);
+        tabla1.getColumnModel().getColumn(2).setPreferredWidth(120);
+        tabla1.getColumnModel().getColumn(3).setPreferredWidth(25);
+        tabla1.getColumnModel().getColumn(4).setPreferredWidth(25);
 
-//     }   
-// }
+        scroll = new JScrollPane(tabla1);
+        scroll.setBounds(5,50,500,220);
+        add(scroll);
+
+        boton1 = new JButton("Volver");
+        boton1.setBounds(10,320,80,30);
+        add(boton1);
+        boton1.addActionListener(this);
+    }
+
+
+    public void actionPerformed(ActionEvent e){
+        if(e.getSource() == boton1){
+            menucoordinador.setVisible(true);
+            dispose();
+        }
+    }
+
+    public String comprobarCarrera(){
+        if(coordinador.getCarrera() != null){
+            return coordinador.getCarrera().getNombre();
+        }else{
+            return "Ninguna";
+        }
+    }
+}

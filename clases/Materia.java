@@ -14,14 +14,13 @@ public class Materia {
     private int curso;
     private int cuatrimestre;
     HashMap<String, String> situacion = new HashMap<String, String>();
-    HashMap<String, Double> asistencias = new HashMap<String, Double>(); // Modificación para almacenar porcentaje de asistencia
+    HashMap<String, Double> asistencias = new HashMap<String, Double>();
     private List<Alumno> alumnos;
 
-    public Materia(int id_materia, String nombre, Profesor profesor, int curso, int cuatrimestre){
+    public Materia(int id_materia, String nombre, int curso, int cuatrimestre){
         alumnos = new ArrayList<>();
         this.id_materia = id_materia;
         this.nombre = nombre;
-        this.profesor = profesor;
         this.curso = curso;
         this.cuatrimestre = cuatrimestre;
     }
@@ -66,11 +65,24 @@ public class Materia {
         this.cuatrimestre = cuatrimestre;
     }
 
-    public void inscribirAlumno(int id_alumno) {
-        if (!situacion.containsKey(String.valueOf(id_alumno))) {
-            situacion.put(String.valueOf(id_alumno), "Inscripto");
-            asistencias.put(String.valueOf(id_alumno), 0.0); // Iniciar con 0% de asistencia
-            System.out.println("Alumno " + id_alumno + " inscripto a la materia " + nombre);
+    public Double getAsistenciaByNLegajo(int n_legajo) {
+        String legajo = String.valueOf(n_legajo);
+        if (asistencias.containsKey(legajo)) {
+            return asistencias.get(legajo);
+        } else {
+            System.out.println("El alumno con legajo " + n_legajo + " no está inscrito en esta materia.");
+            return null; // Si el alumno no está inscrito, se devuelve null
+        }
+    }
+    
+
+    public void inscribirAlumno(Alumno alumno) {
+        String n_legajo = String.valueOf(alumno.getN_legajo());
+        if (!situacion.containsKey(n_legajo)) {
+            situacion.put(n_legajo, "Inscripto");
+            asistencias.put(n_legajo, 0.0); // Iniciar con 0% de asistencia
+            alumnos.add(alumno);
+            System.out.println("Alumno " + n_legajo + " inscripto a la materia " + nombre);
         } else {
             System.out.println("El alumno ya está inscrito en esta materia.");
         }

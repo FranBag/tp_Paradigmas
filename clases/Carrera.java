@@ -68,8 +68,15 @@ public class Carrera {
         this.coordinador = coordinador;
     }
 
+    public Materia getMateriaByID(int id_materia){
+        for(int i = 0; i < materias.size(); i++){
+            if(materias.get(i).getId_materia() == id_materia){
+                return materias.get(i);
+            }
+        }
+        return null; //si no se encuentra una materia con ese id devuelve null
+    }
 
-    
     //matriculacion de alumnos
     public void matricularAlumno(Alumno alumno){
         this.alumnos.add(alumno);
@@ -84,6 +91,10 @@ public class Carrera {
         }
     }
 
+    public void crearMateria(int id_materia, String nombre, int curso, int cuatrimestre){
+        Materia materianueva = new Materia(id_materia, nombre, curso, cuatrimestre);
+        materias.add(materianueva);
+    }
 
     public Alumno[] listarAlumnos(){
         return alumnos.toArray(new Alumno[0]);
