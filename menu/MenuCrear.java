@@ -6,6 +6,7 @@ import java.awt.event.*;
 import TP1_Paradigmas.clases.Universidad;
 import TP1_Paradigmas.usuarios.*;
 
+//menu encargado de crear nuevas instancias de usuarios
 public class MenuCrear extends JFrame implements ActionListener, ItemListener{
     private JLabel label1, label2, label3, label4, label5, label6;
     private JTextField input1, input2, input3, input4, input5;
@@ -99,6 +100,7 @@ public class MenuCrear extends JFrame implements ActionListener, ItemListener{
         combo1.addItemListener(this);
     }
 
+    @Override
     public void actionPerformed(ActionEvent e){
         if(e.getSource() == boton1){
             usuario.setNombre(input1.getText());

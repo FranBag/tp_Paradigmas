@@ -10,7 +10,7 @@ import TP1_Paradigmas.usuarios.Coordinador;
 import TP1_Paradigmas.usuarios.Profesor;
 
 
-
+//menú de logeo
 public class MenuLogearse extends JFrame implements ActionListener, ChangeListener{
     
     private JLabel label1;

@@ -8,6 +8,7 @@ import javax.swing.*;
 import javax.swing.event.*;
 import java.awt.event.*;
 
+//menu alumno
 public class MenuAlumno extends JFrame implements ActionListener{
     
     private JLabel label1, label2, label3;
@@ -59,6 +60,7 @@ public class MenuAlumno extends JFrame implements ActionListener{
         add(label3);
     }
 
+    @Override
     public void actionPerformed(ActionEvent e){
         if(e.getSource() == boton1){
             MenuMatricularseCarrera menuMC = new MenuMatricularseCarrera(universidad, this, alumno);
@@ -169,6 +171,7 @@ class MenuMatricularseCarrera extends JFrame implements ActionListener{
         boton2.addActionListener(this);
     }
 
+    @Override
     public void actionPerformed(ActionEvent e){
         if(e.getSource() == boton1){
             int filaSeleccionada = tabla1.getSelectedRow();
@@ -259,6 +262,7 @@ class MenuInscribirseMateria extends JFrame implements ActionListener{
         boton2.addActionListener(this);
     }
 
+    @Override
     public void actionPerformed(ActionEvent e){
         if(e.getSource() == boton1){
             int filaSeleccionada = tabla1.getSelectedRow();
@@ -289,6 +293,7 @@ class MenuInscribirseMateria extends JFrame implements ActionListener{
     }
 }
 
+//menu encargado de mostrar la asistencia en distintas materias del alumno
 class MenuVerAsistencia extends JFrame implements ActionListener{
     private JLabel label1;
     private JButton boton1;
@@ -341,6 +346,7 @@ class MenuVerAsistencia extends JFrame implements ActionListener{
         boton1.addActionListener(this);
     }
 
+    @Override
     public void actionPerformed(ActionEvent e){
         if(e.getSource() == boton1){
             menualumno.setVisible(true);

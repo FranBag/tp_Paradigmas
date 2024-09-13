@@ -51,7 +51,7 @@ public class Universidad {
                 return profesor;
             }
         }
-        return null; // Si no se encuentra un profesor con ese nombre, devuelve null
+        return null; //si no se encuentra un profesor con ese nombre, devuelve null
     }
     public Profesor getProfesorByNombre(String nombre) {
         for (Profesor profesor : profesores) {
@@ -59,7 +59,7 @@ public class Universidad {
                 return profesor;
             }
         }
-        return null; // Si no se encuentra un profesor con ese nombre, devuelve null
+        return null; //si no se encuentra un profesor con ese nombre, devuelve null
     }
 
     public Profesor[] listarProfesores() {
@@ -71,14 +71,14 @@ public class Universidad {
         profesores.add(profesor);
     }
 
-    //crea una carrera
+    // Crea una carrera
     public void crearCarrera(int id_carrera, String nombre, int duracion, int precio_inscripcion,
     int precio_cuota){
         Carrera carreraNueva = new Carrera(id_carrera, nombre, duracion, precio_inscripcion, precio_cuota);
         carreras.add(carreraNueva);
     }
 
-    //elimina una carrera
+    // Elimina una carrera
     public void eliminarCarrera(int id_carrera){
         for(int i = 0; i < carreras.size(); i++){
             if(carreras.get(i).getId_carrera() == id_carrera){
@@ -88,7 +88,7 @@ public class Universidad {
         }
     }
 
-    //lista todas las carreras
+    // Lista todas las carreras
     public Carrera[] listarCarreras(){
         return carreras.toArray(new Carrera[0]);
     }

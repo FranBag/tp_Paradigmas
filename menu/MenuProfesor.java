@@ -9,6 +9,7 @@ import TP1_Paradigmas.usuarios.Profesor;
 
 import java.awt.event.*;
 
+//menu del profesor
 public class MenuProfesor extends JFrame implements ActionListener, ItemListener{
 
     private JLabel label1;
@@ -60,6 +61,7 @@ public class MenuProfesor extends JFrame implements ActionListener, ItemListener
         boton3.addActionListener(this);
     }
 
+    @Override
     public void actionPerformed(ActionEvent e){
         if(e.getSource() == boton1){
             MenuGestionarAlumnos menuGA = new MenuGestionarAlumnos(this, profesor);
@@ -152,6 +154,7 @@ class MenuGestionarAlumnos extends JFrame implements ActionListener, ItemListene
         boton2.addActionListener(this);
     }
 
+    @Override
     public void actionPerformed(ActionEvent e){
         if(e.getSource() == boton1){
             for(int i = 0; i < filas.length; i++){
@@ -231,7 +234,7 @@ class MenuListarMateriasACargo extends JFrame implements ActionListener{
         boton1.addActionListener(this);
     }
 
-
+    @Override
     public void actionPerformed(ActionEvent e){
         if(e.getSource() == boton1){
             menuprofesor.setVisible(true);

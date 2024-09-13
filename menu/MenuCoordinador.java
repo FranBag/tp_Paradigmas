@@ -7,6 +7,7 @@ import javax.swing.*;
 import javax.swing.event.*;
 import java.awt.event.*;
 
+//menu de coordinador
 public class MenuCoordinador extends JFrame implements ActionListener, ItemListener{
     
     private JLabel label1;
@@ -101,6 +102,7 @@ public class MenuCoordinador extends JFrame implements ActionListener, ItemListe
 }
 
 
+//menu utilizado para asignar un profesor a una materia
 class MenuAsignarProfesor extends JFrame implements ActionListener {
     private JLabel label1, label2, label3;
     private JComboBox<String> comboMaterias, comboProfesores;
@@ -150,8 +152,8 @@ class MenuAsignarProfesor extends JFrame implements ActionListener {
         setLocationRelativeTo(null);
     }
 
+    //método que carga las materias y los profesores al combo
     private void cargarDatos() {
-        // Cargar materias al comboMaterias
         Carrera carrera = coordinador.getCarrera();
         if (carrera != null) {
             Materia[] materias = carrera.listarMaterias();
@@ -160,7 +162,6 @@ class MenuAsignarProfesor extends JFrame implements ActionListener {
             }
         }
 
-        // Cargar profesores al comboProfesores
         Profesor[] profesores = universidad.listarProfesores();
         for (Profesor profesor : profesores) {
             comboProfesores.addItem(profesor.getNombre() + " " + profesor.getApellido());
@@ -256,6 +257,7 @@ class MenuListarAlumnosCarrera extends JFrame implements ActionListener{
         boton1.addActionListener(this);
     }
 
+    @Override
     public void actionPerformed(ActionEvent e){
         if(e.getSource() == boton1){
             menucoordinador.setVisible(true);
@@ -339,6 +341,7 @@ class MenuListarMateriasCarrera extends JFrame implements ActionListener{
     }
 
 
+    @Override
     public void actionPerformed(ActionEvent e){
         if(e.getSource() == boton1){
             menucoordinador.setVisible(true);
